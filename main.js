@@ -6,33 +6,37 @@ const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
 
-
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// CORS setup
 const corsOptions = {
-  origin: "*", // For development; in production, specify your frontend domain
+  origin: "*", // Replace with your frontend domain for production
   methods: "GET,POST",
   allowedHeaders: "Content-Type",
 };
+
 app.use(cors(corsOptions));
-// Set up file uploads
+
+// File upload middleware (temporary folder setup)
 const upload = multer({ dest: "uploads/" });
 
-// Route to convert to PDF
+// Routes
 app.post("/convert", upload.single("file"), async (req, res) => {
   if (!req.file) return res.status(400).send("No file uploaded");
 
   const filePath = path.join(__dirname, req.file.path);
   const ext = path.extname(req.file.originalname).toLowerCase();
   const outputFileName = `${uuidv4()}.pdf`;
-  const outputPath = path.join(__dirname, "converted", outputFileName);
+  const outputDir = path.join(__dirname, "converted");
+  const outputPath = path.join(outputDir, outputFileName);
 
   try {
     const pdfDoc = await PDFDocument.create();
 
     if (ext === ".txt") {
       const text = await fs.readFile(filePath, "utf8");
-      const page = pdfDoc.addPage([595, 842]); // A4 size
+      const page = pdfDoc.addPage([595, 842]); // A4
       const { width, height } = page.getSize();
       page.drawText(text, {
         x: 50,
@@ -44,8 +48,7 @@ app.post("/convert", upload.single("file"), async (req, res) => {
       });
     } else if ([".jpg", ".jpeg", ".png"].includes(ext)) {
       const imageBytes = await fs.readFile(filePath);
-      let image;
-      let dims;
+      let image, dims;
       if (ext === ".png") {
         image = await pdfDoc.embedPng(imageBytes);
       } else {
@@ -63,6 +66,7 @@ app.post("/convert", upload.single("file"), async (req, res) => {
       return res.status(400).send("Unsupported file type");
     }
 
+    await fs.ensureDir(outputDir); // ✅ Ensure converted/ exists
     const pdfBytes = await pdfDoc.save();
     await fs.writeFile(outputPath, pdfBytes);
 
@@ -80,6 +84,19 @@ app.get("/", (req, res) => {
   res.send("File to PDF Conversion Service is running 🚀");
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
-});
+// Start server with async directory checks
+async function startServer() {
+  try {
+    await fs.ensureDir(path.join(__dirname, "uploads"));   // ✅ Ensure uploads/ exists
+    await fs.ensureDir(path.join(__dirname, "converted")); // ✅ Ensure converted/ exists
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running at http://localhost:${PORT}`);
+    });
+  } catch (err) {
+    console.error("❌ Failed to start server:", err);
+    process.exit(1);
+  }
+}
+
+startServer();
