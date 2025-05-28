@@ -9,7 +9,12 @@ const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.use(cors());
+const corsOptions = {
+  origin: "*", // For development; in production, specify your frontend domain
+  methods: "GET,POST",
+  allowedHeaders: "Content-Type",
+};
+app.use(cors(corsOptions));
 // Set up file uploads
 const upload = multer({ dest: "uploads/" });
 
