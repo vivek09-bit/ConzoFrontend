@@ -1,9 +1,9 @@
 // src/pages/Convert.jsx
 import React, { useState, useRef } from "react";
+import { Helmet } from "react-helmet";
 import axios from "axios";
 import { DOMAIN } from "../constants";
 
-// const BACKEND = import.meta.env.VITE_BACKEND_DOMAIN;
 
 function ImageToPdf() {
   const [files, setFiles] = useState([]);
@@ -49,14 +49,10 @@ function ImageToPdf() {
 
     try {
       const response = await axios.post(
-        
         `${DOMAIN}/api/imagetopdf`,
         formData,
-        {
-          responseType: "blob",
-        }
+        { responseType: "blob" }
       );
-
       const blob = new Blob([response.data], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       setPdfUrl(url);
@@ -78,113 +74,123 @@ function ImageToPdf() {
   };
 
   return (
-    <section className="py-8 px-4 flex flex-col items-center">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mt-4">
-        {/* IMG to PDF Card */}
-        <div className="bg-gray-800 p-8 rounded-lg shadow-xl text-center border border-gray-700">
-          <h1 className="text-4xl font-bold text-white mb-6">IMG to PDF</h1>
-
-          <div>
-            <label className="cursor-pointer bg-indigo-600 text-white px-10 py-4 rounded-xl text-xl font-semibold hover:bg-indigo-700 transition-colors duration-300 inline-block mb-4 shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75">
-              Choose Files
-              <input
-                type="file"
-                multiple
-                accept="image/*"
-                onChange={handleFileChange}
-                className="hidden"
-                ref={fileInputRef}
-              />
-            </label>
-            <p className="text-gray-400 text-sm mt-4">
-              Supported: JPG, PNG, GIF
-            </p>
-          </div>
-        </div>
-
-        {/* Word to PDF Card (Coming Soon) */}
-        <div className="bg-gray-800 p-8 rounded-lg shadow-xl text-center border border-gray-700 opacity-60 cursor-not-allowed">
-          <h2 className="text-4xl font-bold text-gray-500 mb-6">Word to PDF</h2>
-          <p className="text-gray-400 text-2xl font-bold">Coming Soon</p>
-          <p className="text-gray-500 text-sm mt-4">
-            Stay tuned for this feature!
+    <>
+      <Helmet>
+        <title>Free Online Image to PDF Converter | Fast &amp; Secure</title>
+        <meta
+          name="description"
+          content="Instantly convert JPG, PNG, and GIF images to PDF files online. No registration required. Secure, fast, and easy-to-use image to PDF converter."
+        />
+        <meta
+          name="keywords"
+          content="image to pdf, jpg to pdf, png to pdf, gif to pdf, online converter, free pdf tool, secure pdf conversion"
+        />
+        <meta property="og:title" content="Free Online Image to PDF Converter" />
+        <meta property="og:description" content="Convert images to PDF online for free. Fast, secure, and easy-to-use tool supporting JPG, PNG, and GIF." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://yourdomain.com/convert" />
+        <meta property="og:image" content="https://yourdomain.com/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Free Online Image to PDF Converter" />
+        <meta name="twitter:description" content="Convert images to PDF online for free. Fast, secure, and easy-to-use tool supporting JPG, PNG, and GIF." />
+        <meta name="twitter:image" content="https://yourdomain.com/og-image.jpg" />
+      </Helmet>
+      <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-100 px-4">
+        <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-8 flex flex-col items-center">
+          <h1 className="text-4xl font-extrabold text-indigo-700 mb-4 tracking-tight">
+            IMG to PDF
+          </h1>
+          <p className="text-gray-500 mb-8 text-center">
+            Convert your images (JPG, PNG, GIF) to a single PDF file in seconds.
           </p>
-        </div>
-      </div>
-
-      {pdfUrl && (
-        <div className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 cursor-pointer hover:bg-blue-700 transition-colors duration-300">
-          <a
-            href={pdfUrl}
-            download="converted.pdf"
-            className="underline font-semibold text-lg"
-          >
-            Download PDF
-          </a>
-        </div>
-      )}
-
-      {showToast && (
-        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-lg z-50 text-lg font-medium">
-          {toastMessage}
-        </div>
-      )}
-
-      {/* File Details Pop-up Modal */}
-      {showFileDetailsPopup && files.length > 0 && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-800 p-8 rounded-lg shadow-2xl relative max-w-xl w-full border border-gray-700">
-            {/* Close button */}
-            <button
-              onClick={closePopup}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl font-bold"
-            >
-              &times;
-            </button>
-
-            <h3 className="font-bold mb-4 text-2xl text-white text-center">
-              Selected Files:
-            </h3>
-            <ul className="list-disc list-inside mb-4 text-gray-300 max-h-40 overflow-y-auto pr-2">
-              {files.map((file, index) => (
-                <li key={index} className="truncate mb-1 text-center">
-                  {file.name} ({(file.size / 1024).toFixed(2)} KB)
-                </li>
-              ))}
-            </ul>
-
-            <h3 className="font-bold mb-4 text-2xl text-white text-center">
-              Image Previews:
-            </h3>
-            {/* Grid container: Removed place-items-center to avoid conflicts */}
-            <div className="grid grid-cols-1 w-full gap-2 max-h-60 overflow-y-auto pr-2">
-              {files.map((file, index) => (
-                <div
-                  key={index}
-                  className="relative w-full border-gray-600 rounded overflow-hidden flex item-center justify-center col-span-full"
-                >
-                  <img
-                    src={URL.createObjectURL(file)}
-                    alt={file.name}
-                    className="object-cover w-24 h-24"
-                    onLoad={(e) => URL.revokeObjectURL(e.target.src)}
-                  />
-                </div>
-              ))}
+          <label className="cursor-pointer bg-indigo-600 text-white px-8 py-3 rounded-xl text-lg font-semibold hover:bg-indigo-700 transition-all duration-200 shadow-md mb-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75">
+            Choose Images
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={handleFileChange}
+              className="hidden"
+              ref={fileInputRef}
+            />
+          </label>
+          <span className="text-gray-400 text-xs mb-2">
+            Supported: JPG, PNG, GIF
+          </span>
+          {pdfUrl && (
+            <div className="mt-6 w-full flex justify-center">
+              <a
+                href={pdfUrl}
+                download="converted.pdf"
+                className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg shadow-lg font-semibold text-lg transition-all duration-200"
+              >
+                Download PDF
+              </a>
             </div>
-
-            {/* Convert to PDF button in the popup */}
-            <button
-              onClick={handleConvert}
-              className="mt-6 block w-full px-10 py-4 bg-green-600 text-white rounded-xl text-xl font-semibold hover:bg-green-700 transition-colors duration-300 shadow-md transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75"
-              disabled={isConverting || files.length === 0}
-            >
-              {isConverting ? "Converting..." : "Convert to PDF"}
-            </button>
-          </div>
+          )}
         </div>
-      )}
-    </section>
+
+        {/* Toast */}
+        {showToast && (
+          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-lg z-50 text-lg font-medium animate-fade-in">
+            {toastMessage}
+          </div>
+        )}
+
+        {/* File Details Modal */}
+        {showFileDetailsPopup && files.length > 0 && (
+          <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+            <div className="bg-white p-8 rounded-2xl shadow-2xl relative max-w-xl w-full border border-gray-200">
+              <button
+                onClick={closePopup}
+                className="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl font-bold"
+                aria-label="Close"
+              >
+                &times;
+              </button>
+              <h3 className="font-bold mb-4 text-2xl text-indigo-700 text-center">
+                Selected Files
+              </h3>
+              <ul className="list-disc list-inside mb-4 text-gray-700 max-h-32 overflow-y-auto pr-2 text-center">
+                {files.map((file, index) => (
+                  <li key={index} className="truncate mb-1">
+                    {file.name}{" "}
+                    <span className="text-gray-400">
+                      ({(file.size / 1024).toFixed(2)} KB)
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <h3 className="font-bold mb-4 text-xl text-indigo-600 text-center">
+                Image Previews
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-40 overflow-y-auto mb-4">
+                {files.map((file, index) => (
+                  <div
+                    key={index}
+                    className="border border-gray-200 rounded-lg overflow-hidden flex items-center justify-center bg-gray-50"
+                  >
+                    <img
+                      src={URL.createObjectURL(file)}
+                      alt={file.name}
+                      className="object-cover w-20 h-20"
+                      onLoad={(e) => URL.revokeObjectURL(e.target.src)}
+                    />
+                  </div>
+                ))}
+              </div>
+              <button
+                onClick={handleConvert}
+                className="mt-4 w-full px-8 py-3 bg-indigo-600 text-white rounded-xl text-lg font-semibold hover:bg-indigo-700 transition-all duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75"
+                disabled={isConverting || files.length === 0}
+              >
+                {isConverting ? "Converting..." : "Convert to PDF"}
+              </button>
+            </div>
+          </div>
+        )}
+      </section>
+    </>
   );
 }
 
