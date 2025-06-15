@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import axios from "axios";
 import { DOMAIN } from "../constants";
 
-const BACKEND = import.meta.env.VITE_BACKEND_DOMAIN;
+// const BACKEND = import.meta.env.VITE_BACKEND_DOMAIN;
 
 function ImageToPdf() {
   const [files, setFiles] = useState([]);
@@ -50,7 +50,7 @@ function ImageToPdf() {
     try {
       const response = await axios.post(
         
-        `${BACKEND}/api/imagetopdf`,
+        `${DOMAIN}/api/imagetopdf`,
         formData,
         {
           responseType: "blob",

@@ -1,1 +1,1 @@
-export const DOMAIN = 'https://api.example.com';
+export const DOMAIN = import.meta.env.VITE_BACKEND_DOMAIN;
