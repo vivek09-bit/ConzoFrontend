@@ -2,7 +2,7 @@
 import React, { useState, useRef } from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
-import { DOMAIN } from "../constants";
+import { DOMAIN } from "../../constants";
 
 
 function ImageToPdf() {

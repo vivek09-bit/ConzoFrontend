@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import { DOMAIN } from "../constants";
+import { DOMAIN } from "../../constants";
 import { Helmet } from "react-helmet";
 
 function JpgToPdf() {

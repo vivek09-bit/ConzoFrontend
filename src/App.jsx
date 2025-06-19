@@ -4,23 +4,23 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 import HomePage from "./pages/Home";
-import ImageToPdf from "./pages/ImageToPdf";
-import JpgToPdf from "./pages/JpgToPdf";
-import PngToPdf from "./pages/PngToPdf";
-import HeicTooPdf from "./pages/HeicToPdf";
-import WebpToPdf from "./pages/WebpToPdf";
-import MultipleImagesToPdf from "./pages/MultipleImagesToPdf";
-import CombineImagesToPdf from "./pages/CombineImagesToPdf";
-import ScreenshotToPdf from "./pages/ScreenshotToPdf";
-import PhotoToPdf from "./pages/PhotoToPdf";
-import OnlineImageToPdf from "./pages/OnlineImageToPdf";
-import IPhoneImageToPdf from "./pages/IPhoneImageToPdf";
-import AndroidImageToPdf from "./pages/AndroidImageToPdf";
-import WindowsImageToPdf from "./pages/WindowsImageToPdf";
-import MacImageToPdf from "./pages/MacImageToPdf";
+import ImageToPdf from "./pages/ToPdf/ImageToPdf";
+import JpgToPdf from "./pages/ToPdf/JpgToPdf";
+import PngToPdf from "./pages/ToPdf/PngToPdf";
+import HeicTooPdf from "./pages/ToPdf/HeicToPdf";
+import WebpToPdf from "./pages/ToPdf/WebpToPdf";
+import MultipleImagesToPdf from "./pages/ToPdf/MultipleImagesToPdf";
+import CombineImagesToPdf from "./pages/ToPdf/CombineImagesToPdf";
+import ScreenshotToPdf from "./pages/ToPdf/ScreenshotToPdf";
+import PhotoToPdf from "./pages/ToPdf/PhotoToPdf";
+import OnlineImageToPdf from "./pages/ToPdf/OnlineImageToPdf";
+import IPhoneImageToPdf from "./pages/ToPdf/IPhoneImageToPdf";
+import AndroidImageToPdf from "./pages/ToPdf/AndroidImageToPdf";
+import WindowsImageToPdf from "./pages/ToPdf/WindowsImageToPdf";
+import MacImageToPdf from "./pages/ToPdf/MacImageToPdf";
 import NotFound404 from "./pages/NotFound404";
 import Header from "./components/Header";
-import PdfToJpg from "./pages/PdfToJpg";
+import PdfToJpg from "./pages/ToJpg/PdfToJpg";
 import PdfToPng from "./pages/PdfToPng";
 import PngToWebp from "./pages/PngToWebp";
 import WebpToPng from "./pages/WebpToPng";
@@ -28,19 +28,21 @@ import PdfToWebp from "./pages/PdfToWebp";
 import PdfToBmp from "./pages/PdfToBmp";
 import PdfToTiff from "./pages/PdfToTiff";
 import JpgToPng from "./pages/JpgToPng";
-import PngToJpg from "./pages/PngToJpg";
-import HeicToJpg from "./pages/HeicToJpg";
-import WebpToJpg from "./pages/WebpToJpg";
-import BmpToJpg from "./pages/BmpToJpg";
-import TiffToJpg from "./pages/TiffToJpg";
+import PngToJpg from "./pages/ToJpg/PngToJpg";
+import HeicToJpg from "./pages/ToJpg/HeicToJpg";
+import WebpToJpg from "./pages/ToJpg/WebpToJpg";
+import BmpToJpg from "./pages/ToJpg/BmpToJpg";
+import TiffToJpg from "./pages/ToJpg/TiffToJpg";
 import JpgToWebp from "./pages/JpgToWebp";
 import SvgToPng from "./pages/SvgToPng";
-import CompressPdf from "./pages/CompressPdf";
+import CompressPdf from "./pages/ToPdf/CompressPdf";
+import CompressImage from "./pages/CompressImage";
 import MergePdf from "./pages/MergePdf";
 import SplitPdf from "./pages/SplitPdf";
 import PdfToWord from "./pages/PdfToWord";
-import WordToPdf from "./pages/WordToPdf";
+import WordToPdf from "./pages/Topdf/WordToPdf";
 import JpgToJpeg from "./pages/JpgToJpeg";
+import ImageConverter from "./pages/ImageConverter";
 
 function App() {
   return (
@@ -86,7 +88,7 @@ function App() {
             <Route path="/jpg-to-webp" element={<JpgToWebp />} />
             <Route path="/png-to-webp" element={<PngToWebp />} />
             <Route path="/svg-to-png" element={<SvgToPng />} />
-
+            <Route path="/image-convert" element={<ImageConverter />} />
             {/* PDF Utilities */}
             <Route path="/compress-pdf" element={<CompressPdf />} />
             <Route path="/merge-pdf" element={<MergePdf />} />
@@ -109,6 +111,8 @@ function App() {
             <Route path="/android-image-to-pdf" element={<AndroidImageToPdf />} />
             <Route path="/windows-image-to-pdf" element={<WindowsImageToPdf />} />
             <Route path="/mac-image-to-pdf" element={<MacImageToPdf />} />
+            
+            <Route path="/compress-image" element={<CompressImage />} />
             
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<NotFound404 />} />
