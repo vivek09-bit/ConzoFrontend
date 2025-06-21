@@ -40,7 +40,7 @@ import CompressImage from "./pages/CompressImage";
 import MergePdf from "./pages/MergePdf";
 import SplitPdf from "./pages/SplitPdf";
 import PdfToWord from "./pages/PdfToWord";
-import WordToPdf from "./pages/Topdf/WordToPdf";
+// import WordToPdf from "./pages/Topdf/WordToPdf";
 import JpgToJpeg from "./pages/JpgToJpeg";
 import ImageConverter from "./pages/ImageConverter";
 
@@ -94,7 +94,7 @@ function App() {
             <Route path="/merge-pdf" element={<MergePdf />} />
             <Route path="/split-pdf" element={<SplitPdf />} />
             <Route path="/pdf-to-word" element={<PdfToWord />} />
-            <Route path="/word-to-pdf" element={<WordToPdf />} />
+            {/* <Route path="/word-to-pdf" element={<WordToPdf />} /> */}
 
             {/* Existing routes */}
             <Route path="/jpg-to-pdf" element={<JpgToPdf />} /> {/* important */}
