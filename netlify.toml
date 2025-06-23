@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "http://www.asthica.com/*"
+  to = "https://asthica.com/:splat"
+  status = 301
+  force = true

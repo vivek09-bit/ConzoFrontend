@@ -116,7 +116,7 @@ function JpgToPdf() {
         <title>JPG to PDF Converter | Free, Fast & Secure Online Tool</title>
         <meta
           name="description"
-          content="Convert JPG images to PDF online for free. Fast, secure, no registration. Batch convert multiple JPGs to a single PDF instantly."
+          content="Convert JPG images to PDF online free. JPG to PDF Tool is Fast, secure, no registration. Batch convert multiple JPGs to a single PDF instantly."
         />
         <meta property="og:title" content="JPG to PDF Converter" />
       </Helmet>
