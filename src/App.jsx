@@ -43,7 +43,7 @@ import PdfToWord from "./pages/PdfToWord";
 // import WordToPdf from "./pages/Topdf/WordToPdf";
 import JpgToJpeg from "./pages/JpgToJpeg";
 import ImageConverter from "./pages/ImageConverter";
-
+import AvifToJpg from './pages/AvifToJpg'
 function App() {
   return (
     <Router>
@@ -71,24 +71,27 @@ function App() {
         <main className="flex-1 w-full max-w-screen-xl mx-auto px-2 sm:px-4 md:px-8 py-4 md:py-8 bg-white rounded-xl shadow-sm">
           <Routes>
             {/* PDF to Image Converters */}
-            <Route path="/pdf-to-jpg" element={<PdfToJpg />} /> {/* pdf to jpg */}
+            <Route path="/pdf-to-jpg" element={<PdfToJpg />} />
             <Route path="/pdf-to-png" element={<PdfToPng />} />
             <Route path="/pdf-to-webp" element={<PdfToWebp />} />
             <Route path="/pdf-to-bmp" element={<PdfToBmp />} />
             <Route path="/pdf-to-tiff" element={<PdfToTiff />} />
 
             {/* Image Format Converters */}
+            <Route path="/jpg-to-pdf" element={<JpgToPdf />} />
             <Route path="/jpg-to-png" element={<JpgToPng />} />
             <Route path="/jpg-to-jpeg" element={<JpgToJpeg />} />
+            <Route path="/jpg-to-webp" element={<JpgToWebp />} />
             <Route path="/png-to-jpg" element={<PngToJpg />} />
             <Route path="/heic-to-jpg" element={<HeicToJpg />} />
             <Route path="/webp-to-jpg" element={<WebpToJpg />} />
             <Route path="/bmp-to-jpg" element={<BmpToJpg />} />
             <Route path="/tiff-to-jpg" element={<TiffToJpg />} />
-            <Route path="/jpg-to-webp" element={<JpgToWebp />} />
+            <Route path="/avif-to-jpg" element={<AvifToJpg />} />
             <Route path="/png-to-webp" element={<PngToWebp />} />
             <Route path="/svg-to-png" element={<SvgToPng />} />
             <Route path="/image-convert" element={<ImageConverter />} />
+            
             {/* PDF Utilities */}
             <Route path="/compress-pdf" element={<CompressPdf />} />
             <Route path="/merge-pdf" element={<MergePdf />} />
@@ -97,7 +100,6 @@ function App() {
             {/* <Route path="/word-to-pdf" element={<WordToPdf />} /> */}
 
             {/* Existing routes */}
-            <Route path="/jpg-to-pdf" element={<JpgToPdf />} /> {/* important */}
             <Route path="/image-to-pdf" element={<ImageToPdf />} />
             <Route path="/png-to-pdf" element={<PngToPdf />} />
             <Route path="/heic-to-pdf" element={<HeicTooPdf />} />

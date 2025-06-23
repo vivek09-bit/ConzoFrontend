@@ -1,225 +1,333 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { DOMAIN } from "../../constants";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
+
+const VITE_BACKEND_DOMAIN = import.meta.env.VITE_BACKEND_DOMAIN;
 
 function JpgToPdf() {
   const [files, setFiles] = useState([]);
   const [pdfUrl, setPdfUrl] = useState(null);
   const [isConverting, setIsConverting] = useState(false);
-  const [toastMessage, setToastMessage] = useState("");
-  const [showToast, setShowToast] = useState(false);
-  const [showFileDetailsPopup, setShowFileDetailsPopup] = useState(false);
-
+  const [feedback, setFeedback] = useState("");
+  const [progress, setProgress] = useState(0);
   const fileInputRef = useRef(null);
+  const progressRef = useRef(null);
 
-  const showToastMessage = (message) => {
-    setToastMessage(message);
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000);
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const droppedFiles = Array.from(e.dataTransfer.files).filter(
+      (file) => file.type === "image/jpeg"
+    );
+    if (droppedFiles.length) {
+      setFiles(droppedFiles);
+      setFeedback("");
+    } else {
+      setFeedback("Please drop only JPG files.");
+    }
   };
 
+  const handleDragOver = (e) => e.preventDefault();
+
   const handleFileChange = (e) => {
-    const selectedFiles = [...e.target.files];
-    const jpgFiles = selectedFiles.filter((file) =>
-      file.type === "image/jpeg"
+    const selectedFiles = Array.from(e.target.files).filter(
+      (file) => file.type === "image/jpeg"
     );
-
-    if (jpgFiles.length > 0) {
-      setFiles(jpgFiles);
-      setShowFileDetailsPopup(true);
+    if (selectedFiles.length) {
+      setFiles(selectedFiles);
+      setFeedback("");
     } else {
-      showToastMessage("Please select only JPG files.");
+      setFeedback("Please select only JPG files.");
     }
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
 
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
+  const startProgressSimulation = () => {
+    setProgress(0);
+    const messages = [
+      "Reading your images...",
+      "Optimizing quality...",
+      "Merging into a single PDF...",
+      "Almost done...",
+    ];
+    let i = 0;
+
+    progressRef.current = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 90) return prev;
+        return prev + 10;
+      });
+
+      setFeedback(messages[i]);
+      i++;
+      if (i >= messages.length) i = messages.length - 1;
+    }, 1200);
+  };
+
+  const stopProgressSimulation = () => {
+    clearInterval(progressRef.current);
+    setProgress(100);
   };
 
   const handleConvert = async () => {
     if (!files.length) {
-      showToastMessage("Please select at least one JPG file.");
+      setFeedback("Please select at least one JPG file.");
       return;
     }
+
+    setIsConverting(true);
+    setFeedback("Starting conversion...");
+    setPdfUrl(null);
+    startProgressSimulation();
 
     const formData = new FormData();
     files.forEach((file) => formData.append("images", file));
 
-    setIsConverting(true);
-    showToastMessage("Converting...");
-    setShowFileDetailsPopup(false);
-
     try {
       const response = await axios.post(
-        `${DOMAIN}/api/jpg-to-pdf`,
+        `${VITE_BACKEND_DOMAIN}/api/jpg-to-pdf`,
         formData,
-        {
-          responseType: "blob",
-        }
+        { responseType: "blob" }
       );
-
       const blob = new Blob([response.data], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       setPdfUrl(url);
-      showToastMessage("PDF is ready to download!");
+      setFeedback("PDF is ready to download!");
     } catch (error) {
-      console.error("Conversion error:", error);
-      showToastMessage("Conversion failed. Please try again.");
+      setFeedback("Conversion failed. Please try again.");
     } finally {
+      stopProgressSimulation();
       setIsConverting(false);
     }
   };
 
-  const closePopup = () => {
-    setShowFileDetailsPopup(false);
+  const removeFiles = () => {
     setFiles([]);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
+    setPdfUrl(null);
+    setFeedback("");
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
+  const totalSize = files.reduce((acc, f) => acc + f.size, 0);
+
   return (
-    <section className="py-8 px-4 flex flex-col items-center">
-      {/* Meta Tags for SEO */}
+    <main>
       <Helmet>
-        <title>JPG to PDF Converter | Free Online Tool</title>
+        <title>JPG to PDF Converter | Free, Fast & Secure Online Tool</title>
         <meta
           name="description"
-          content="Convert your JPG images to PDF quickly and easily with our free online tool. No registration required."
+          content="Convert JPG images to PDF online for free. Fast, secure, no registration. Batch convert multiple JPGs to a single PDF instantly."
         />
-        <meta
-          name="keywords"
-          content="jpg to pdf, convert jpg to pdf, free jpg to pdf converter, online jpg to pdf, photo to pdf"
-        />
+        <meta property="og:title" content="JPG to PDF Converter" />
       </Helmet>
 
-      {/* Header Section */}
-      <header className="text-center mb-10">
-        <h1 className="text-5xl font-bold mb-4">JPG to PDF Converter</h1>
-        <p className="text-lg text-gray-400">
-          Convert your JPG images to PDF quickly and easily. No registration or
-          software installation required.
-        </p>
-      </header>
+      <section className="py-8 px-4 flex flex-col items-center">
+        <header className="text-center mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold mb-3">
+            JPG to PDF Converter
+          </h1>
+          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+            Convert JPG images to PDF online for free. No registration, no watermark. Instant results.
+          </p>
+        </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mt-4">
-        {/* JPG to PDF Card */}
-        <div className="bg-gray-800 p-8 rounded-lg shadow-xl text-center border border-gray-700">
-          <h1 className="text-4xl font-bold text-white mb-6">JPG to PDF</h1>
-
-          <div>
-            <label className="cursor-pointer bg-indigo-600 text-white px-10 py-4 rounded-xl text-xl font-semibold hover:bg-indigo-700 transition-colors duration-300 inline-block mb-4 shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75">
-              Choose JPG Files
-              <input
-                type="file"
-                multiple
-                accept="image/jpeg"
-                onChange={handleFileChange}
-                className="hidden"
-                ref={fileInputRef}
-              />
-            </label>
-            <p className="text-gray-400 text-sm mt-4">
-              Supported: JPG only
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Conversion Section */}
-      <div className="mt-10 text-center">
-        <button
-          className="bg-green-600 text-white px-10 py-4 rounded-lg text-lg font-semibold hover:bg-green-700 transition-all duration-300 shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75"
-          onClick={handleConvert}
-          disabled={isConverting || files.length === 0}
+        {/* Drag & Drop Zone */}
+        <div
+          className="w-full max-w-xl bg-white border-2 border-dashed border-indigo-400 rounded-xl p-8 flex flex-col items-center mb-6 shadow-md"
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
         >
-          {isConverting ? "Converting..." : "Convert to PDF"}
-        </button>
-      </div>
-
-      {/* Download Section */}
-      {pdfUrl && (
-        <div className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 cursor-pointer hover:bg-blue-700 transition-colors duration-300">
-          <a
-            href={pdfUrl}
-            download="converted.pdf"
-            className="underline font-semibold text-lg"
-          >
-            Download PDF
-          </a>
+          <label className="cursor-pointer bg-indigo-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition mb-4 shadow">
+            Select JPG Files
+            <input
+              type="file"
+              multiple
+              accept="image/jpeg"
+              onChange={handleFileChange}
+              className="hidden"
+              ref={fileInputRef}
+            />
+          </label>
+          <p className="text-gray-400 text-sm mb-2">
+            or drag & drop JPG files here
+          </p>
+          <p className="text-gray-400 text-xs">
+            Supported: JPG only, up to 20 files, max 50MB total
+          </p>
         </div>
-      )}
 
-      {showToast && (
-        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-lg z-50 text-lg font-medium">
-          {toastMessage}
-        </div>
-      )}
-
-      {/* File Details Pop-up Modal */}
-      {showFileDetailsPopup && files.length > 0 && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-800 p-8 rounded-lg shadow-2xl relative max-w-xl w-full border border-gray-700">
-            {/* Close button */}
-            <button
-              onClick={closePopup}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl font-bold"
-            >
-              &times;
-            </button>
-
-            <h3 className="font-bold mb-4 text-2xl text-white text-center">
-              Selected JPG Files:
-            </h3>
-            <ul className="list-disc list-inside mb-4 text-gray-300 max-h-40 overflow-y-auto pr-2">
-              {files.map((file, index) => (
-                <li key={index} className="truncate mb-1 text-center">
-                  {file.name} ({(file.size / 1024).toFixed(2)} KB)
+        {/* File Info */}
+        {files.length > 0 && (
+          <div className="w-full max-w-xl bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
+            <div className="flex justify-between items-center mb-2">
+              <span className="font-semibold text-gray-700">
+                {files.length} file{files.length > 1 ? "s" : ""} selected (
+                {(totalSize / 1024 / 1024).toFixed(2)} MB)
+              </span>
+              <button
+                onClick={removeFiles}
+                className="text-red-500 hover:underline text-sm"
+              >
+                Remove all
+              </button>
+            </div>
+            <ul className="max-h-32 overflow-y-auto text-gray-600 text-sm mb-2">
+              {files.map((file, idx) => (
+                <li key={idx} className="truncate">
+                  {file.name} ({(file.size / 1024).toFixed(1)} KB)
                 </li>
               ))}
             </ul>
+            {/* Image Previews */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-2">
+              {files.slice(0, 4).map((file, idx) => (
+                <img
+                  key={idx}
+                  src={URL.createObjectURL(file)}
+                  alt={`preview-${idx}`}
+                  className="w-full h-24 object-cover rounded shadow-sm border"
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Other Converters Section */}
-      <div className="mt-16 bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-3xl text-center">
-        <h2 className="text-3xl font-semibold mb-6">
-          Looking for Other Conversions?
-        </h2>
-        <p className="text-gray-400 text-lg mb-4">
-          If you want to convert other file types to PDF, check out our other
-          tools:
-        </p>
-        <div className="flex flex-wrap justify-center gap-4">
-          <a
-            href="/pdf-to-png"
-            className="bg-indigo-600 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-indigo-700 transition-all duration-300 shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75"
-          >
-            PDF to PNG
-          </a>
-          <a
-            href="/pdf-to-webp"
-            className="bg-indigo-600 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-indigo-700 transition-all duration-300 shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75"
-          >
-            PDF to WebP
-          </a>
-          <a
-            href="/pdf-to-bmp"
-            className="bg-indigo-600 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-indigo-700 transition-all duration-300 shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75"
-          >
-            PDF to BMP
-          </a>
-          <a
-            href="/pdf-to-tiff"
-            className="bg-indigo-600 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-indigo-700 transition-all duration-300 shadow-md transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75"
-          >
-            PDF to TIFF
-          </a>
-        </div>
-      </div>
-    </section>
+        {/* Feedback and Progress */}
+        {feedback && (
+          <div className="text-center text-base font-medium text-gray-700 mb-4">
+            {feedback}
+          </div>
+        )}
+
+        {isConverting && (
+          <div className="w-full max-w-xs mt-2">
+            <div className="h-2 bg-gray-200 rounded-full">
+              <div
+                className="h-2 bg-green-500 rounded-full transition-all duration-300"
+                style={{ width: `${progress}%` }}
+              ></div>
+            </div>
+            <p className="text-center text-sm text-gray-500 mt-2">
+              Converting... {progress}%
+            </p>
+          </div>
+        )}
+
+        {/* Convert Button */}
+        <button
+          className="bg-green-600 text-white px-10 py-4 rounded-lg text-lg font-semibold hover:bg-green-700 transition-all duration-300 shadow-md transform hover:scale-105 focus:outline-none mb-4"
+          onClick={handleConvert}
+          disabled={isConverting || files.length === 0}
+        >
+          {isConverting ? "Processing..." : "Convert to PDF"}
+        </button>
+
+        {/* Download PDF */}
+        {pdfUrl && (
+          <div className="mt-2 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition-colors duration-300">
+            <a href={pdfUrl} download="converted.pdf" className="underline font-semibold text-lg">
+              Download PDF
+            </a>
+          </div>
+        )}
+
+        
+        {/* Conversion Tips & FAQ for SEO */}
+        <section className="mt-12 w-full max-w-2xl bg-white rounded-lg shadow p-6">
+          <h2 className="text-2xl font-bold mb-3">
+            How to Convert JPG to PDF Online
+          </h2>
+          <ol className="list-decimal list-inside text-gray-700 mb-4">
+            <li>
+              Click <b>Select JPG Files</b> or drag and drop your images.
+            </li>
+            <li>Arrange your files if needed (coming soon).</li>
+            <li>
+              Click <b>Convert to PDF</b> and download your PDF instantly.
+            </li>
+          </ol>
+          <h3 className="font-semibold mb-1">Frequently Asked Questions</h3>
+          <dl className="mb-2">
+            <dt className="font-medium">Is this JPG to PDF converter free?</dt>
+            <dd className="mb-2 text-gray-600">
+              Yes, it’s 100% free and always will be.
+            </dd>
+            <dt className="font-medium">Are my files secure?</dt>
+            <dd className="mb-2 text-gray-600">
+              All conversions are processed securely and files are deleted
+              automatically.
+            </dd>
+            <dt className="font-medium">Can I convert multiple JPGs at once?</dt>
+            <dd className="mb-2 text-gray-600">
+              Yes, you can batch convert up to 20 JPG files at a time.
+            </dd>
+          </dl>
+        </section>
+
+        {/* Other Converters Section */}
+        <section className="mt-10 w-full max-w-2xl">
+          <h2 className="text-xl font-semibold mb-3 text-center">
+            Other Popular Tools
+          </h2>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              to="/pdf-to-jpg"
+              className="bg-indigo-600 text-white px-5 py-2 rounded hover:bg-indigo-700 transition"
+            >
+              PDF to JPG
+            </Link>
+            <Link
+              to="/pdf-to-png"
+              className="bg-indigo-600 text-white px-5 py-2 rounded hover:bg-indigo-700 transition"
+            >
+              PDF to PNG
+            </Link>
+            <Link
+              to="/pdf-to-webp"
+              className="bg-indigo-600 text-white px-5 py-2 rounded hover:bg-indigo-700 transition"
+            >
+              PDF to WebP
+            </Link>
+            <Link
+              to="/jpg-to-png"
+              className="bg-indigo-600 text-white px-5 py-2 rounded hover:bg-indigo-700 transition"
+            >
+              JPG to PNG
+            </Link>
+            <Link
+              to="/jpg-to-jpeg"
+              className="bg-indigo-600 text-white px-5 py-2 rounded hover:bg-indigo-700 transition"
+            >
+              JPG to JPEG
+            </Link>
+            <Link
+              to="/jpg-to-webp"
+              className="bg-indigo-600 text-white px-5 py-2 rounded hover:bg-indigo-700 transition"
+            >
+              JPG to WebP
+            </Link>
+            <Link
+              to="/webp-to-png"
+              className="bg-indigo-600 text-white px-5 py-2 rounded hover:bg-indigo-700 transition"
+            >
+              WebP to PNG
+            </Link>
+            <Link
+              to="/avif-to-jpg"
+              className="bg-indigo-600 text-white px-5 py-2 rounded hover:bg-indigo-700 transition"
+            >
+              AVIF to JPG
+            </Link>
+            <Link
+              to="/image-to-pdf"
+              className="bg-indigo-600 text-white px-5 py-2 rounded hover:bg-indigo-700 transition"
+            >
+              Image to PDF
+            </Link>
+          </div>
+        </section>
+      </section>
+    </main>
   );
 }
 
