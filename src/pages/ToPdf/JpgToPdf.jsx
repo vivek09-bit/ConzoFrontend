@@ -112,24 +112,55 @@ function JpgToPdf() {
 
   return (
     <main>
-      <Helmet>
-        <title>JPG to PDF Converter | Free, Fast & Secure Online Tool</title>
-        <meta
-          name="description"
-          content="Convert JPG images to PDF online free. JPG to PDF Tool is Fast, secure, no registration. Batch convert multiple JPGs to a single PDF instantly."
-        />
-        <meta property="og:title" content="JPG to PDF Converter" />
-      </Helmet>
+<Helmet>
+  <title>JPG to PDF Converter | Free, Fast & Secure Online Tool</title>
+  <meta
+    name="description"
+    content="Convert JPG to PDF online free – no registration, no watermark. Fast and secure JPG to PDF tool to merge images into a single high-quality PDF."
+  />
+  <meta
+    name="keywords"
+    content="jpg to pdf, convert jpg to pdf, image to pdf, merge jpg to pdf, online jpg to pdf converter, free jpg to pdf"
+  />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://yourdomain.com/jpg-to-pdf" />
+
+  {/* Open Graph for Facebook & LinkedIn */}
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="JPG to PDF Converter – Free & Secure" />
+  <meta
+    property="og:description"
+    content="Easily convert JPG images into a single PDF file online. 100% free, fast and secure. No email required!"
+  />
+  <meta property="og:url" content="https://yourdomain.com/jpg-to-pdf" />
+  <meta
+    property="og:image"
+    content="https://yourdomain.com/assets/og-jpg-to-pdf.png"
+  />
+
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="JPG to PDF – Free Online Converter" />
+  <meta
+    name="twitter:description"
+    content="Convert JPG to PDF online for free. Fast, easy, and secure. No watermark. No signup."
+  />
+  <meta
+    name="twitter:image"
+    content="https://yourdomain.com/assets/og-jpg-to-pdf.png"
+  />
+</Helmet>
+
 
       <section className="py-8 px-4 flex flex-col items-center">
-        <header className="text-center mb-8">
+        <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-3">
             JPG to PDF Converter
           </h1>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
             Convert JPG images to PDF online for free. No registration, no watermark. Instant results.
           </p>
-        </header>
+        </div>
 
         {/* Drag & Drop Zone */}
         <div

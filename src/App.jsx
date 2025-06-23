@@ -47,28 +47,9 @@ import AvifToJpg from './pages/AvifToJpg'
 function App() {
   return (
     <Router>
-      <Helmet>
-        <title>All-in-One PDF & Image Converter Tools | Asthica</title>
-        <meta name="description" content="Free online tools to convert images to PDF, compress PDFs, merge/split files, and convert between image formats like JPG, PNG, WebP, HEIC, and more." />
-        <meta name="keywords" content="image to pdf, jpg to pdf, pdf to jpg, png to pdf, compress pdf, merge pdf, split pdf, pdf to word, word to pdf, online image converter, heic to jpg, webp to png, convert images to pdf, asthica tools" />
-        <meta name="author" content="Asthica" />
-        <link rel="canonical" href="https://www.asthica.com/" />
-        <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="All-in-One PDF & Image Converter Tools | Asthica" />
-        <meta property="og:description" content="Convert images to PDF and handle all your file format needs online. Free, fast, secure tools by Asthica." />
-        <meta property="og:url" content="https://www.asthica.com/" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://www.asthica.com/og-image.jpg" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Online PDF & Image Tools | Asthica" />
-        <meta name="twitter:description" content="Convert and edit PDFs and images with Asthica's free tools." />
-        <meta name="twitter:image" content="https://www.asthica.com/og-image.jpg" />
-        {/* Minimal Soft Theme Colors */}
-        <meta name="theme-color" content="#6366F1" />
-      </Helmet>
       <div className="min-h-screen flex flex-col font-sans bg-[#E0F2FE] text-[#1F2937]">
         <Header />
-        <main className="flex-1 w-full max-w-screen-xl mx-auto px-2 sm:px-4 md:px-8 py-4 md:py-8 bg-white rounded-xl shadow-sm">
+        {/* <main className="flex-1 w-full max-w-screen-xl mx-auto px-2 sm:px-4 md:px-8 py-4 md:py-8 bg-white rounded-xl shadow-sm"> */}
           <Routes>
             {/* PDF to Image Converters */}
             <Route path="/pdf-to-jpg" element={<PdfToJpg />} />
@@ -119,7 +100,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<NotFound404 />} />
           </Routes>
-        </main>
+        {/* </main> */}
       </div>
     </Router>
   );
