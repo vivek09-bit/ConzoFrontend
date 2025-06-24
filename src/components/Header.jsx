@@ -42,41 +42,7 @@ const icons = {
 // Define your mega menu categories
 const megaMenuCategories = [
   {
-    label: "PDF Converter",
-    links: [
-      { to: "/pdf-to-jpg", label: "PDF to JPG" },
-      { to: "/pdf-to-png", label: "PDF to PNG" },
-      { to: "/pdf-to-webp", label: "PDF to WEBP" },
-      { to: "/pdf-to-bmp", label: "PDF to BMP" },
-      { to: "/pdf-to-tiff", label: "PDF to TIFF" },
-      { to: "/pdf-to-word", label: "PDF to Word" },
-      { to: "/word-to-pdf", label: "Word to PDF" },
-      { to: "/compress-pdf", label: "Compress PDF" },
-      { to: "/merge-pdf", label: "Merge PDF" },
-      { to: "/split-pdf", label: "Split PDF" },
-    ],
-  },
-  {
-    label: "Convert to PDF",
-    links: [
-      { to: "/image-to-pdf", label: "Image to PDF" },
-      { to: "/jpg-to-pdf", label: "JPG to PDF" },
-      { to: "/png-to-pdf", label: "PNG to PDF" },
-      { to: "/heic-to-pdf", label: "HEIC to PDF" },
-      { to: "/webp-to-pdf", label: "WEBP to PDF" },
-      { to: "/multiple-images-to-pdf", label: "Multiple Images to PDF" },
-      { to: "/combine-images-to-pdf", label: "Combine Images to PDF" },
-      { to: "/screenshot-to-pdf", label: "Screenshot to PDF" },
-      { to: "/photo-to-pdf", label: "Photo to PDF" },
-      { to: "/online-image-to-pdf", label: "Online Image to PDF" },
-      { to: "/iphone-image-to-pdf", label: "iPhone Image to PDF" },
-      { to: "/android-image-to-pdf", label: "Android Image to PDF" },
-      { to: "/windows-image-to-pdf", label: "Windows Image to PDF" },
-      { to: "/mac-image-to-pdf", label: "Mac Image to PDF" },
-    ],
-  },
-  {
-    label: "Image converter",
+    label: "Image Converters",
     links: [
       { to: "/jpg-to-png", label: "JPG to PNG" },
       { to: "/png-to-jpg", label: "PNG to JPG" },
@@ -88,6 +54,43 @@ const megaMenuCategories = [
       { to: "/png-to-webp", label: "PNG to WEBP" },
       { to: "/webp-to-png", label: "WEBP to PNG" },
       { to: "/svg-to-png", label: "SVG to PNG" },
+    ],
+  },
+  {
+    label: "Document Converters",
+    links: [
+      { to: "/pdf-to-word", label: "PDF to Word" },
+      { to: "/word-to-pdf", label: "Word to PDF" },
+      { to: "/jpg-to-pdf", label: "JPG to PDF" },
+      { to: "/png-to-pdf", label: "PNG to PDF" },
+      { to: "/heic-to-pdf", label: "HEIC to PDF" },
+      { to: "/webp-to-pdf", label: "WEBP to PDF" },
+      { to: "/image-to-pdf", label: "Image to PDF" },
+      { to: "/combine-images-to-pdf", label: "Combine Images to PDF" },
+      { to: "/screenshot-to-pdf", label: "Screenshot to PDF" },
+    ],
+  },
+  {
+    label: "PDF Tools",
+    links: [
+      { to: "/compress-pdf", label: "Compress PDF" },
+      { to: "/merge-pdf", label: "Merge PDF" },
+      { to: "/split-pdf", label: "Split PDF" },
+      { to: "/pdf-to-jpg", label: "PDF to JPG" },
+      { to: "/pdf-to-png", label: "PDF to PNG" },
+      { to: "/pdf-to-webp", label: "PDF to WEBP" },
+      { to: "/pdf-to-bmp", label: "PDF to BMP" },
+      { to: "/pdf-to-tiff", label: "PDF to TIFF" },
+    ],
+  },
+  {
+    label: "Device-Specific Tools",
+    links: [
+      { to: "/iphone-image-to-pdf", label: "iPhone Image to PDF" },
+      { to: "/android-image-to-pdf", label: "Android Image to PDF" },
+      { to: "/windows-image-to-pdf", label: "Windows Image to PDF" },
+      { to: "/mac-image-to-pdf", label: "Mac Image to PDF" },
+      { to: "/online-image-to-pdf", label: "Online Image to PDF" },
     ],
   },
 ];
@@ -176,8 +179,8 @@ function Header() {
               {/* Mega Menu Dropdown */}
               <div
                 id={`mega-menu-${idx}`}
-                className={`absolute left-0 mt-2 bg-white text-gray-900 shadow-2xl rounded-xl p-4 min-w-[260px] ${
-                  openCategory === idx ? "block" : "hidden"
+                className={`absolute left-0 mt-2 bg-white text-gray-900 shadow-2xl rounded-xl p-4 min-w-[260px] transform transition-all duration-200 origin-top ${
+                  openCategory === idx ? "block scale-100 opacity-100" : "scale-95 opacity-0 pointer-events-none"
                 }`}
                 style={{ zIndex: 100 }}
               >
@@ -187,10 +190,11 @@ function Header() {
                       <NavLink
                         to={link.to}
                         className={({ isActive }) =>
-                          `flex items-center px-2 py-2 rounded-lg font-medium transition-colors duration-200 mb-1 ${
+                          `flex items-center px-2 py-2 rounded-lg font-medium transition-colors duration-200 mb-1
+                          ${
                             isActive
                               ? "bg-blue-100 text-blue-700"
-                              : "hover:bg-gray-100"
+                              : "hover:bg-indigo-600 hover:text-white hover:shadow"
                           }`
                         }
                       >

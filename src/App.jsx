@@ -42,6 +42,7 @@ import SplitPdf from "./pages/SplitPdf";
 import PdfToWord from "./pages/PdfToWord";
 // import WordToPdf from "./pages/Topdf/WordToPdf";
 import JpgToJpeg from "./pages/JpgToJpeg";
+import JpegToJpg from "./pages/JpegToJpg";
 import ImageConverter from "./pages/ImageConverter";
 import AvifToJpg from './pages/AvifToJpg'
 function App() {
@@ -62,10 +63,12 @@ function App() {
             <Route path="/jpg-to-pdf" element={<JpgToPdf />} />
             <Route path="/jpg-to-png" element={<JpgToPng />} />
             <Route path="/jpg-to-jpeg" element={<JpgToJpeg />} />
+            <Route path="/jpeg-to-jpg" element={<JpegToJpg />} />
             <Route path="/jpg-to-webp" element={<JpgToWebp />} />
             <Route path="/png-to-jpg" element={<PngToJpg />} />
             <Route path="/heic-to-jpg" element={<HeicToJpg />} />
             <Route path="/webp-to-jpg" element={<WebpToJpg />} />
+            <Route path="/webp-to-png" element={<WebpToPng />} />
             <Route path="/bmp-to-jpg" element={<BmpToJpg />} />
             <Route path="/tiff-to-jpg" element={<TiffToJpg />} />
             <Route path="/avif-to-jpg" element={<AvifToJpg />} />
