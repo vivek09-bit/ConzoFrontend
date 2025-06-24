@@ -30,7 +30,7 @@ import PdfToTiff from "./pages/PdfToTiff";
 import JpgToPng from "./pages/JpgToPng";
 import PngToJpg from "./pages/ToJpg/PngToJpg";
 import HeicToJpg from "./pages/ToJpg/HeicToJpg";
-import WebpToJpg from "./pages/ToJpg/WebpToJpg";
+import WebpToJpg from "./pages/WebpToJpg";
 import BmpToJpg from "./pages/ToJpg/BmpToJpg";
 import TiffToJpg from "./pages/ToJpg/TiffToJpg";
 import JpgToWebp from "./pages/JpgToWebp";
@@ -67,7 +67,6 @@ function App() {
             <Route path="/jpg-to-webp" element={<JpgToWebp />} />
             <Route path="/png-to-jpg" element={<PngToJpg />} />
             <Route path="/heic-to-jpg" element={<HeicToJpg />} />
-            <Route path="/webp-to-jpg" element={<WebpToJpg />} />
             <Route path="/webp-to-png" element={<WebpToPng />} />
             <Route path="/bmp-to-jpg" element={<BmpToJpg />} />
             <Route path="/tiff-to-jpg" element={<TiffToJpg />} />
@@ -75,6 +74,7 @@ function App() {
             <Route path="/png-to-webp" element={<PngToWebp />} />
             <Route path="/svg-to-png" element={<SvgToPng />} />
             <Route path="/image-convert" element={<ImageConverter />} />
+            <Route path="/webp-to-jpg" element={<WebpToJpg />} />
             
             {/* PDF Utilities */}
             <Route path="/compress-pdf" element={<CompressPdf />} />

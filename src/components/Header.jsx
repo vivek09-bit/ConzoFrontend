@@ -126,26 +126,13 @@ function Header() {
       <div className="container mx-auto flex items-center justify-between py-4 px-4">
         {/* Logo and Title */}
         <div className="flex items-center space-x-3">
-          {/* <img src="/Ignite1.png" alt="ConvertIgnite Logo" className="h-10" /> */}
           <span className="text-2xl font-extrabold text-white tracking-tight">
-            ConvertIgnite
+            <a href="/">ImgPdfHub</a>
           </span>
         </div>
 
         {/* Desktop Mega Menu */}
         <div className="hidden md:flex items-center space-x-4">
-          {/* <NavLink
-            to="/"
-            className={({ isActive }) =>
-              `px-4 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                isActive
-                  ? "bg-indigo-600 text-white"
-                  : "text-gray-200 hover:bg-gray-700"
-              }`
-            }
-          >
-            Home
-          </NavLink> */}
           {megaMenuCategories.map((cat, idx) => (
             <div
               key={cat.label}
@@ -248,19 +235,6 @@ function Header() {
           </button>
         </div>
         <nav className="overflow-y-auto h-[calc(100%-64px)] px-4 py-4">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              `block px-4 py-2 rounded-lg font-medium transition-colors duration-200 mb-2 ${
-                isActive
-                  ? "bg-indigo-600 text-white"
-                  : "text-gray-200 hover:bg-gray-700"
-              }`
-            }
-            onClick={() => setSidebarOpen(false)}
-          >
-            Home
-          </NavLink>
           {megaMenuCategories.map((cat, idx) => (
             <div key={cat.label} className="mb-4">
               <button

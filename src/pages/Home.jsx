@@ -56,27 +56,44 @@ const HomePage = () => {
     <>
 
     
-      <Helmet>
-        <title>ConvertIgnite | Free Online Image to PDF Converter & File Tools</title>
-        <meta
-          name="description"
-          content="ConvertIgnite offers free online tools to convert JPG, PNG, HEIC, WEBP, and screenshots to PDF. Merge images, compress files, and convert documents easily on any device."
-        />
-        <meta
-          name="keywords"
-          content="image to pdf, jpg to pdf, png to pdf, heic to pdf, webp to pdf, screenshot to pdf, merge images, combine images, compress files, online converter, convertignite"
-        />
-        <meta property="og:title" content="ConvertIgnite | Free Online Image to PDF Converter & File Tools" />
-        <meta property="og:description" content="Convert images and documents to PDF, merge files, and compress documents online for free. Fast, secure, and easy to use on any device." />
-        <meta property="og:url" content={DOMAIN} />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content={`${DOMAIN}og-image.png`} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="ConvertIgnite | Free Online Image to PDF Converter & File Tools" />
-        <meta name="twitter:description" content="Convert images and documents to PDF, merge files, and compress documents online for free. Fast, secure, and easy to use on any device." />
-        <meta name="twitter:image" content={`${DOMAIN}og-image.png`} />
-        <link rel="canonical" href={DOMAIN} />
-      </Helmet>
+    <Helmet>
+  {/* PRIMARY TITLE TAG */}
+  <title>ImgPdfHub | Convert Images to PDF Online Free – JPG, PNG, HEIC & More</title>
+
+  {/* META DESCRIPTION (Optimized for CTR & Keywords) */}
+  <meta
+    name="description"
+    content="Easily convert JPG, PNG, HEIC, and WEBP images to PDF online for free with ImgPdfHub. Merge, compress, and manage your PDFs effortlessly on any device – fast, secure, and 100% free."
+  />
+
+  {/* META KEYWORDS (Still optional for minor engines) */}
+  <meta
+    name="keywords"
+    content="image to pdf, jpg to pdf, png to pdf, heic to pdf, webp to pdf, free pdf converter, online image to pdf, merge images to pdf, compress pdf, photo to pdf, screenshot to pdf, ImgPdfHub"
+  />
+
+  {/* OPEN GRAPH (Facebook & others) */}
+  <meta property="og:title" content="ImgPdfHub | Convert Images to PDF Online Free – JPG, PNG, HEIC & More" />
+  <meta property="og:description" content="Convert images to PDF instantly with ImgPdfHub. Merge, compress, and manage PDFs for free — fast, easy, and secure." />
+  <meta property="og:url" content={DOMAIN} />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content={`${DOMAIN}assets/og-image.png`} />
+  <meta property="og:image:alt" content="ImgPdfHub – Convert images to PDF online for free" />
+
+  {/* TWITTER CARD (Social Sharing) */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ImgPdfHub | Convert Images to PDF Online Free – JPG, PNG, HEIC & More" />
+  <meta name="twitter:description" content="Convert and manage PDFs online with ImgPdfHub. Simple tools for image-to-PDF, merge, compress, and more." />
+  <meta name="twitter:image" content={`${DOMAIN}assets/og-image.png`} />
+  <meta name="twitter:image:alt" content="Convert JPG, PNG to PDF - ImgPdfHub" />
+
+  {/* CANONICAL URL */}
+  <link rel="canonical" href={DOMAIN} />
+
+  {/* OPTIONAL: FAVICON */}
+  <link rel="icon" href={`${DOMAIN}favicon.ico`} />
+</Helmet>
+
 
       <section className="text-center py-12 px-4">
         <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-indigo-500">Welcome to ConvertIgnite</h1>
