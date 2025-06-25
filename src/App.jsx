@@ -44,7 +44,8 @@ import PdfToWord from "./pages/PdfToWord";
 import JpgToJpeg from "./pages/JpgToJpeg";
 import JpegToJpg from "./pages/JpegToJpg";
 import ImageConverter from "./pages/ImageConverter";
-import AvifToJpg from './pages/AvifToJpg'
+import AvifToJpg from './pages/AvifToJpg';
+import AvifToPng from './pages/AvifToPng'
 function App() {
   return (
     <Router>
@@ -72,9 +73,10 @@ function App() {
             <Route path="/tiff-to-jpg" element={<TiffToJpg />} />
             <Route path="/avif-to-jpg" element={<AvifToJpg />} />
             <Route path="/png-to-webp" element={<PngToWebp />} />
-            <Route path="/svg-to-png" element={<SvgToPng />} />
+            <Route path="/avif-to-png" element={<AvifToPng />} />
             <Route path="/image-convert" element={<ImageConverter />} />
             <Route path="/webp-to-jpg" element={<WebpToJpg />} />
+            <Route path="/avif-to-jpg" element={<AvifToJpg />} />
             
             {/* PDF Utilities */}
             <Route path="/compress-pdf" element={<CompressPdf />} />

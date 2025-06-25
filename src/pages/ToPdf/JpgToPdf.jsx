@@ -174,7 +174,7 @@ function JpgToPdf() {
           content="jpg to pdf, convert jpg to pdf, image to pdf, merge jpg to pdf, online jpg to pdf converter, free jpg to pdf"
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://yourdomain.com/jpg-to-pdf" />
+        <link rel="canonical" href="https://imgpdfhub.com/jpg-to-pdf" />
         {/* Open Graph for Facebook & LinkedIn */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="JPG to PDF Converter – Free & Secure" />
@@ -182,10 +182,10 @@ function JpgToPdf() {
           property="og:description"
           content="Easily convert JPG images into a single PDF file online. 100% free, fast and secure. No email required!"
         />
-        <meta property="og:url" content="https://yourdomain.com/jpg-to-pdf" />
+        <meta property="og:url" content="https://imgpdfhub.com/jpg-to-pdf" />
         <meta
           property="og:image"
-          content="https://yourdomain.com/assets/og-jpg-to-pdf.png"
+          content="https://imgpdfhub.com/assets/og-jpg-to-pdf.png"
         />
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -196,7 +196,7 @@ function JpgToPdf() {
         />
         <meta
           name="twitter:image"
-          content="https://yourdomain.com/assets/og-jpg-to-pdf.png"
+          content="https://imgpdfhub.com/assets/og-jpg-to-pdf.png"
         />
         <meta name="theme-color" content="#4F46E5" />  
         <link rel="manifest" href="/manifest.json" />

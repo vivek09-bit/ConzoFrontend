@@ -4,7 +4,11 @@ import { NavLink, useLocation } from "react-router-dom";
 // Define icons for each tool
 const icons = {
   "Image to PDF": <span role="img" aria-label="image-pdf">🖼️</span>,
-  "JPG to PDF": <span role="img" aria-label="jpg-pdf">🟦</span>,
+  "JPEG to JPG": <span role="img" aria-label="jpeg-to-jpg">🖼️</span>,
+  "JPG to JPEG": <span role="img" aria-label="jpg-to-jpeg">🖼️</span>,
+  "AVIF to JPG": <span role="img" aria-label="avif-to-jpg">🖼️</span>,
+  "AVIF to PNG": <span role="img" aria-label="avif-to-png">🖼️</span>,
+  "JPG to PDF": <span role="img" aria-label="jpg-pdf">🟦</span>, 
   "PNG to PDF": <span role="img" aria-label="png-pdf">🟩</span>,
   "HEIC to PDF": <span role="img" aria-label="heic-pdf">📱</span>,
   "WEBP to PDF": <span role="img" aria-label="webp-pdf">🌐</span>,
@@ -44,15 +48,16 @@ const megaMenuCategories = [
   {
     label: "Image Converters",
     links: [
-      { to: "/jpg-to-png", label: "JPG to PNG" },
+
       { to: "/png-to-jpg", label: "PNG to JPG" },
-      { to: "/heic-to-jpg", label: "HEIC to JPG" },
+      { to: "/jpeg-to-jpg", label: "JPEG to JPG" },
       { to: "/webp-to-jpg", label: "WEBP to JPG" },
-      { to: "/bmp-to-jpg", label: "BMP to JPG" },
-      { to: "/tiff-to-jpg", label: "TIFF to JPG" },
+      { to: "/avif-to-jpg", label: "AVIF to JPG" },
       { to: "/jpg-to-webp", label: "JPG to WEBP" },
+      { to: "/jpg-to-png", label: "JPG to PNG" },
       { to: "/png-to-webp", label: "PNG to WEBP" },
-      { to: "/webp-to-png", label: "WEBP to PNG" },
+      { to: "/jpg-to-jpeg", label: "JPG to JPEG" },
+      { to: "/avif-to-png", label: "AVIF to PNG" },
       { to: "/svg-to-png", label: "SVG to PNG" },
     ],
   },

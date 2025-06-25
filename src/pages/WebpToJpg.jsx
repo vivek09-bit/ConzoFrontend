@@ -117,7 +117,7 @@ const WebpToJpg = memo(() => {
 
         try {
             const response = await axios.post(
-                `${VITE_BACKEND_DOMAIN}/api/image/convert-to-jpg`,
+                `${VITE_BACKEND_DOMAIN}/api/image/webp-to-jpg`,
                 formData,
                 { responseType: "arraybuffer" }
             );

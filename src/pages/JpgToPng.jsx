@@ -117,7 +117,7 @@ const JpgToPng = memo(() => {
 
         try {
             const response = await axios.post(
-                `${VITE_BACKEND_DOMAIN}/api/image/convert-to-png`,
+                `${VITE_BACKEND_DOMAIN}/api/image/jpg-to-png`,
                 formData,
                 { responseType: "arraybuffer" }
             );

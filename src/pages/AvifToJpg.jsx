@@ -116,7 +116,7 @@ function AvifToJpg() {
 
         try {
             const response = await axios.post(
-                `${VITE_BACKEND_DOMAIN}/api/image/convert`,
+                `${VITE_BACKEND_DOMAIN}/api/avif-to-jpg`,
                 formData,
                 { responseType: "arraybuffer" }
             );

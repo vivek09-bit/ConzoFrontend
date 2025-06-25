@@ -5,9 +5,9 @@ import { FaSpinner, FaCheckCircle, FaRegTrashAlt, FaArrowUp, FaArrowDown } from 
 
 const VITE_BACKEND_DOMAIN = import.meta.env.VITE_BACKEND_DOMAIN;
 
-const PngToWebp = memo(() => {
+const AvifToPng = memo(() => {
     const [files, setFiles] = useState([]);
-    const [webpUrls, setWebpUrls] = useState([]);
+    const [pngUrls, setPngUrls] = useState([]);
     const [isConverting, setIsConverting] = useState(false);
     const [feedback, setFeedback] = useState("");
     const [progress, setProgress] = useState(0);
@@ -22,13 +22,13 @@ const PngToWebp = memo(() => {
     const handleDrop = (e) => {
         e.preventDefault();
         const droppedFiles = Array.from(e.dataTransfer.files).filter(
-            (file) => file.type === "image/png"
+            (file) => file.type === "image/avif"
         );
         if (droppedFiles.length) {
             setFiles(droppedFiles);
             setFeedback("");
         } else {
-            setFeedback("Please drop only PNG files.");
+            setFeedback("Please drop only AVIF files.");
         }
     };
 
@@ -37,13 +37,13 @@ const PngToWebp = memo(() => {
     // File input handler
     const handleFileChange = useCallback((e) => {
         const selectedFiles = Array.from(e.target.files).filter(
-            (file) => file.type === "image/png"
+            (file) => file.type === "image/avif"
         );
         if (selectedFiles.length) {
             setFiles(selectedFiles);
             setFeedback("");
         } else {
-            setFeedback("Please select only PNG files.");
+            setFeedback("Please select only AVIF files.");
         }
         if (fileInputRef.current) fileInputRef.current.value = "";
     }, []);
@@ -56,7 +56,7 @@ const PngToWebp = memo(() => {
     // Remove all files
     const removeFiles = () => {
         setFiles([]);
-        setWebpUrls([]);
+        setPngUrls([]);
         setFeedback("");
         setShowSuccess(false);
         if (fileInputRef.current) fileInputRef.current.value = "";
@@ -64,9 +64,9 @@ const PngToWebp = memo(() => {
 
     // Simulate progress and steps
     const stepMessages = [
-        "Reading your PNG images...",
+        "Reading your AVIF images...",
         "Optimizing quality...",
-        "Converting to WebP...",
+        "Converting to PNG...",
         "Almost done...",
     ];
 
@@ -100,12 +100,12 @@ const PngToWebp = memo(() => {
     // Main convert handler
     const handleConvert = async () => {
         if (!files.length) {
-            setFeedback("Please select at least one PNG file.");
+            setFeedback("Please select at least one AVIF file.");
             return;
         }
         setIsConverting(true);
         setFeedback("Starting conversion...");
-        setWebpUrls([]);
+        setPngUrls([]);
         setShowSuccess(false);
         startProgressSimulation();
 
@@ -114,21 +114,21 @@ const PngToWebp = memo(() => {
 
         try {
             const response = await axios.post(
-                `${VITE_BACKEND_DOMAIN}/api/png-to-webp`,
+                `${VITE_BACKEND_DOMAIN}/api/avif-to-png`,
                 formData,
                 { responseType: "arraybuffer" }
             );
 
             let urls = [];
             if (files.length === 1) {
-                const blob = new Blob([response.data], { type: "image/webp" });
+                const blob = new Blob([response.data], { type: "image/png" });
                 urls = [URL.createObjectURL(blob)];
             } else {
                 const blob = new Blob([response.data], { type: "application/zip" });
                 urls = [URL.createObjectURL(blob)];
             }
-            setWebpUrls(urls);
-            setFeedback("WebP file(s) ready to download!");
+            setPngUrls(urls);
+            setFeedback("PNG file(s) ready to download!");
         } catch (error) {
             setFeedback("Conversion failed. Please try again.");
         } finally {
@@ -140,10 +140,10 @@ const PngToWebp = memo(() => {
     // Accessibility: focus on download link after conversion
     const downloadLinkRef = useRef(null);
     useEffect(() => {
-        if (webpUrls.length && downloadLinkRef.current) {
+        if (pngUrls.length && downloadLinkRef.current) {
             downloadLinkRef.current.focus();
         }
-    }, [webpUrls]);
+    }, [pngUrls]);
 
     // Clean up intervals on unmount
     useEffect(() => {
@@ -158,24 +158,24 @@ const PngToWebp = memo(() => {
     return (
         <main className="bg-gray-100 min-h-screen flex flex-col items-center">
             <Helmet>
-                <title>PNG to WebP Converter | Free, Fast & Secure Online Tool</title>
+                <title>AVIF to PNG Converter | Free, Fast & Secure Online Tool</title>
                 <meta
                     name="description"
-                    content="Convert PNG to WebP online free – no registration, no watermark. Fast and secure PNG to WebP tool to convert images to high-quality WebP."
+                    content="Convert AVIF to PNG online free – no registration, no watermark. Fast and secure AVIF to PNG tool to convert images to high-quality PNG."
                 />
                 <meta
                     name="keywords"
-                    content="png to webp, convert png to webp, image to webp, online png to webp converter, free png to webp"
+                    content="avif to png, convert avif to png, image to png, online avif to png converter, free avif to png"
                 />
                 <meta name="robots" content="index, follow" />
-                <link rel="canonical" href="https://yourdomain.com/png-to-webp" />
+                <link rel="canonical" href="https://imgpdfhub.com/avif-to-png" />
             </Helmet>
 
             <section className="py-8 px-4 flex flex-col items-center">
                 <div className="text-center mb-8">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-3">PNG to WebP Converter</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold mb-3">AVIF to PNG Converter</h1>
                     <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-                        Convert PNG images to WebP online for free. No registration, no watermark. Instant results.
+                        Convert AVIF images to PNG online for free. No registration, no watermark. Instant results.
                     </p>
                 </div>
 
@@ -187,11 +187,11 @@ const PngToWebp = memo(() => {
                     aria-disabled={isConverting}
                 >
                     <label className="cursor-pointer bg-indigo-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition mb-4 shadow">
-                        Select PNG Files
+                        Select AVIF Files
                         <input
                             type="file"
                             multiple
-                            accept="image/png"
+                            accept="image/avif"
                             onChange={handleFileChange}
                             className="hidden"
                             ref={fileInputRef}
@@ -199,8 +199,8 @@ const PngToWebp = memo(() => {
                             aria-disabled={isConverting}
                         />
                     </label>
-                    <p className="text-gray-400 text-sm mb-2">or drag & drop PNG files here</p>
-                    <p className="text-gray-400 text-xs">Supported: PNG only, up to 20 files, max 50MB total</p>
+                    <p className="text-gray-400 text-sm mb-2">or drag & drop AVIF files here</p>
+                    <p className="text-gray-400 text-xs">Supported: AVIF only, up to 20 files, max 50MB total</p>
                 </div>
 
                 {/* File Info */}
@@ -301,20 +301,20 @@ const PngToWebp = memo(() => {
                 >
                     {isConverting ? (
                         <span className="flex items-center gap-2"><FaSpinner className="animate-spin" /> Processing...</span>
-                    ) : "Convert to WebP"}
+                    ) : "Convert to PNG"}
                 </button>
 
-                {/* Download WebP or ZIP */}
-                {webpUrls.length > 0 && (
+                {/* Download PNG or ZIP */}
+                {pngUrls.length > 0 && (
                     <div className="mt-2 flex flex-row items-center justify-center gap-4">
                         <a
-                            href={webpUrls[0]}
-                            download={files.length === 1 ? "converted.webp" : "converted.zip"}
+                            href={pngUrls[0]}
+                            download={files.length === 1 ? "converted.png" : "converted.zip"}
                             className="underline font-semibold text-lg bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition-colors duration-300"
                             ref={downloadLinkRef}
                             tabIndex={0}
                         >
-                            Download {files.length === 1 ? "WebP" : "ZIP"}
+                            Download {files.length === 1 ? "PNG" : "ZIP"}
                         </a>
                         <button
                             className="bg-red-800 text-white px-6 py-2 rounded-lg font-semibold hover:bg-gray-300 hover:text-gray-800 transition"
@@ -329,4 +329,4 @@ const PngToWebp = memo(() => {
     );
 });
 
-export default PngToWebp;
+export default AvifToPng;

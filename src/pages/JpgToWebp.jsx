@@ -117,7 +117,7 @@ const JpgToWebp = memo(() => {
 
         try {
             const response = await axios.post(
-                `${VITE_BACKEND_DOMAIN}/api/image/convert-to-webp`,
+                `${VITE_BACKEND_DOMAIN}/api/jpg-to-webp`,
                 formData,
                 { responseType: "arraybuffer" }
             );
@@ -181,7 +181,7 @@ const JpgToWebp = memo(() => {
                     content="jpg to webp, convert jpg to webp, image to webp, online jpg to webp converter, free jpg to webp"
                 />
                 <meta name="robots" content="index, follow" />
-                <link rel="canonical" href="https://yourdomain.com/jpg-to-webp" />
+                <link rel="canonical" href="https://imgpdfhub.com/jpg-to-webp" />
                 {/* Open Graph for Facebook & LinkedIn */}
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content="JPG to WEBP Converter – Free & Secure" />
@@ -189,10 +189,10 @@ const JpgToWebp = memo(() => {
                     property="og:description"
                     content="Easily convert JPG images into WEBP files online. 100% free, fast and secure. No email required!"
                 />
-                <meta property="og:url" content="https://yourdomain.com/jpg-to-webp" />
+                <meta property="og:url" content="https://imgpdfhub.com/jpg-to-webp" />
                 <meta
                     property="og:image"
-                    content="https://yourdomain.com/assets/og-jpg-to-webp.png"
+                    content="https://imgpdfhub.com/assets/og-jpg-to-webp.png"
                 />
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
@@ -203,7 +203,7 @@ const JpgToWebp = memo(() => {
                 />
                 <meta
                     name="twitter:image"
-                    content="https://yourdomain.com/assets/og-jpg-to-webp.png"
+                    content="https://imgpdfhub.com/assets/og-jpg-to-webp.png"
                 />
                 <meta name="theme-color" content="#4F46E5" />
                 <link rel="manifest" href="/manifest.json" />
