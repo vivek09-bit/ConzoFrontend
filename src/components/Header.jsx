@@ -58,7 +58,6 @@ const megaMenuCategories = [
       { to: "/png-to-webp", label: "PNG to WEBP" },
       { to: "/jpg-to-jpeg", label: "JPG to JPEG" },
       { to: "/avif-to-png", label: "AVIF to PNG" },
-      { to: "/svg-to-png", label: "SVG to PNG" },
     ],
   },
   {
