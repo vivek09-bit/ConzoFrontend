@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
+import { Helmet } from "react-helmet";
+
 
 const DOMAIN = import.meta.env.VITE_BACKEND_DOMAIN || "http://localhost:5000";
 
@@ -69,6 +71,41 @@ const CompressImage = () => {
   };
 
   return (
+    <>
+    <Helmet>
+  {/* Primary Meta Tags */}
+  <title>Compress Images Online - JPG, PNG, WebP & AVIF | Free & Fast Image Compressor</title>
+  <meta
+    name="description"
+    content="Easily compress JPG, PNG, WebP & AVIF images online with our free image compressor. Reduce file size without losing quality. No downloads, no watermarks!"
+  />
+  <meta
+    name="keywords"
+    content="image compressor, JPG compressor, PNG compressor, compress images online, reduce image size, WebP compressor, photo size reducer, compress photo, image optimizer"
+  />
+  <link rel="canonical" href="https://imgpdfhub.com/compress-image" />
+
+  {/* Open Graph (Facebook, LinkedIn) */}
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Compress JPG, PNG, WebP & AVIF Images Online - Free Image Compressor" />
+  <meta
+    property="og:description"
+    content="Free image compressor to reduce JPG, PNG, WebP, and AVIF sizes online. Maintain image quality while saving bandwidth and storage space. Try now!"
+  />
+  <meta property="og:url" content="https://imgpdfhub.com/compress-image" />
+  <meta property="og:image" content="https://imgpdfhub.com/assets/og-image.png" />
+
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Online Image Compressor | JPG, PNG, WebP, AVIF" />
+  <meta
+    name="twitter:description"
+    content="Compress images online in seconds. JPG, PNG, WebP, and AVIF formats supported. No sign-up, 100% free."
+  />
+  <meta name="twitter:image" content="https://imgpdfhub.com/assets/og-image.png" />
+  {/* <meta name="twitter:site" content="@imgpdfhub" /> */}
+
+</Helmet>
     <section className="py-10 px-4 flex flex-col items-center min-h-screen bg-gray-900 text-white">
       <h1 className="text-4xl font-bold mb-6">Image Compressor</h1>
       <div className="bg-gray-800 p-8 rounded-lg shadow-xl text-center border border-gray-700 w-full max-w-md">
@@ -77,7 +114,7 @@ const CompressImage = () => {
           <input
             type="file"
             multiple
-            accept="image/jpeg,image/png,image/webp,image/avif"
+            accept="image/jpeg,image/png,image/webp,image/avif,image"
             onChange={handleFileChange}
             className="hidden"
             ref={fileInputRef}
@@ -85,7 +122,7 @@ const CompressImage = () => {
         </label>
 
         <p className="text-gray-400 text-sm mb-4">
-          Supported: JPG, PNG, WebP, AVIF
+          Supported: JPG, PNG, WebP, AVIF, JPEG
         </p>
 
         <div className="flex gap-3">
@@ -119,7 +156,9 @@ const CompressImage = () => {
           </div>
         )}
       </div>
-    </section>
+    </section>    
+    </>
+
   );
 };
 
