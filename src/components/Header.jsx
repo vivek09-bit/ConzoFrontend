@@ -1,303 +1,210 @@
-import React, { useState, useRef } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useRef } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { 
+  FiFile, FiImage, FiDownload, FiUpload, FiSettings,
+  FiSmartphone, FiGlobe, FiCamera, FiUsers, FiLayers,
+  FiChevronDown, FiChevronUp, FiX, FiMenu
+} from 'react-icons/fi';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// Define icons for each tool
-const icons = {
-  "Image to PDF": <span role="img" aria-label="image-pdf">🖼️</span>,
-  "JPEG to JPG": <span role="img" aria-label="jpeg-to-jpg">🖼️</span>,
-  "JPG to JPEG": <span role="img" aria-label="jpg-to-jpeg">🖼️</span>,
-  "AVIF to JPG": <span role="img" aria-label="avif-to-jpg">🖼️</span>,
-  "AVIF to PNG": <span role="img" aria-label="avif-to-png">🖼️</span>,
-  "JPG to PDF": <span role="img" aria-label="jpg-pdf">🟦</span>, 
-  "PNG to PDF": <span role="img" aria-label="png-pdf">🟩</span>,
-  "HEIC to PDF": <span role="img" aria-label="heic-pdf">📱</span>,
-  "WEBP to PDF": <span role="img" aria-label="webp-pdf">🌐</span>,
-  "Multiple Images to PDF": <span role="img" aria-label="multi-img-pdf">🗂️</span>,
-  "Combine Images to PDF": <span role="img" aria-label="combine-img-pdf">➕</span>,
-  "Screenshot to PDF": <span role="img" aria-label="screenshot-pdf">📸</span>,
-  "Photo to PDF": <span role="img" aria-label="photo-pdf">📷</span>,
-  "Online Image to PDF": <span role="img" aria-label="online-img-pdf">🌍</span>,
-  "iPhone Image to PDF": <span role="img" aria-label="iphone-img-pdf">📱</span>,
-  "Android Image to PDF": <span role="img" aria-label="android-img-pdf">🤖</span>,
-  "Windows Image to PDF": <span role="img" aria-label="windows-img-pdf">🪟</span>,
-  "Mac Image to PDF": <span role="img" aria-label="mac-img-pdf">🍏</span>,
-  "PDF to JPG": <span role="img" aria-label="pdf-jpg">🖼️</span>,
-  "PDF to PNG": <span role="img" aria-label="pdf-png">🖼️</span>,
-  "PDF to WEBP": <span role="img" aria-label="pdf-webp">🖼️</span>,
-  "PDF to BMP": <span role="img" aria-label="pdf-bmp">🖼️</span>,
-  "PDF to TIFF": <span role="img" aria-label="pdf-tiff">🖼️</span>,
-  "JPG to PNG": <span role="img" aria-label="jpg-png">🟦</span>,
-  "PNG to JPG": <span role="img" aria-label="png-jpg">🟩</span>,
-  "HEIC to JPG": <span role="img" aria-label="heic-jpg">📱</span>,
-  "WEBP to JPG": <span role="img" aria-label="webp-jpg">🌐</span>,
-  "BMP to JPG": <span role="img" aria-label="bmp-jpg">🖼️</span>,
-  "TIFF to JPG": <span role="img" aria-label="tiff-jpg">🖼️</span>,
-  "JPG to WEBP": <span role="img" aria-label="jpg-webp">🟦</span>,
-  "PNG to WEBP": <span role="img" aria-label="png-webp">🟩</span>,
-  "WEBP to PNG": <span role="img" aria-label="webp-png">🌐</span>,
-  "SVG to PNG": <span role="img" aria-label="svg-png">🔳</span>,
-  "Compress PDF": <span role="img" aria-label="compress-pdf">🗜️</span>,
-  "Merge PDF": <span role="img" aria-label="merge-pdf">📎</span>,
-  "Split PDF": <span role="img" aria-label="split-pdf">✂️</span>,
-  "PDF to Word": <span role="img" aria-label="pdf-word">📝</span>,
-  "Word to PDF": <span role="img" aria-label="word-pdf">📄</span>,
+const premiumIcons = {
+  "Image to PDF": <FiFile className="text-indigo-400" />,
+  "PDF to Image": <FiImage className="text-blue-400" />,
+  "Compress PDF": <FiDownload className="text-emerald-400" />,
+  "Merge PDF": <FiLayers className="text-amber-400" />,
+  "Split PDF": <FiSettings className="text-rose-400" />,
+  "JPG to PDF": <FiFile className="text-indigo-400" />,
+  "PNG to PDF": <FiFile className="text-indigo-400" />,
+  "HEIC to JPG": <FiSmartphone className="text-violet-400" />,
+  "WEBP to PNG": <FiGlobe className="text-sky-400" />,
+  "Screenshot to PDF": <FiCamera className="text-pink-400" />
 };
 
-// Define your mega menu categories
-const megaMenuCategories = [
+const menuSections = [
   {
-    label: "Image Converters",
-    links: [
-
-      { to: "/png-to-jpg", label: "PNG to JPG" },
-      { to: "/jpeg-to-jpg", label: "JPEG to JPG" },
-      { to: "/webp-to-jpg", label: "WEBP to JPG" },
-      { to: "/avif-to-jpg", label: "AVIF to JPG" },
-      { to: "/jpg-to-webp", label: "JPG to WEBP" },
-      { to: "/jpg-to-png", label: "JPG to PNG" },
-      { to: "/png-to-webp", label: "PNG to WEBP" },
-      { to: "/jpg-to-jpeg", label: "JPG to JPEG" },
-      { to: "/avif-to-png", label: "AVIF to PNG" },
-    ],
+    title: "Convert",
+    items: [
+      { path: "/jpg-to-pdf", name: "JPG to PDF" },
+      { path: "/png-to-pdf", name: "PNG to PDF" },
+      { path: "/heic-to-jpg", name: "HEIC to JPG" },
+      { path: "/webp-to-png", name: "WEBP to PNG" }
+    ]
   },
   {
-    label: "Document Converters",
-    links: [
-      { to: "/pdf-to-word", label: "PDF to Word" },
-      { to: "/word-to-pdf", label: "Word to PDF" },
-      { to: "/jpg-to-pdf", label: "JPG to PDF" },
-      { to: "/png-to-pdf", label: "PNG to PDF" },
-      { to: "/heic-to-pdf", label: "HEIC to PDF" },
-      { to: "/webp-to-pdf", label: "WEBP to PDF" },
-      { to: "/image-to-pdf", label: "Image to PDF" },
-      { to: "/combine-images-to-pdf", label: "Combine Images to PDF" },
-      { to: "/screenshot-to-pdf", label: "Screenshot to PDF" },
-    ],
+    title: "Compress",
+    items: [
+      { path: "/compress-pdf", name: "Compress PDF" },
+      { path: "/compress-image", name: "Compress Image" }
+    ]
   },
   {
-    label: "PDF Tools",
-    links: [
-      { to: "/compress-pdf", label: "Compress PDF" },
-      { to: "/merge-pdf", label: "Merge PDF" },
-      { to: "/split-pdf", label: "Split PDF" },
-      { to: "/pdf-to-jpg", label: "PDF to JPG" },
-      { to: "/pdf-to-png", label: "PDF to PNG" },
-      { to: "/pdf-to-webp", label: "PDF to WEBP" },
-      { to: "/pdf-to-bmp", label: "PDF to BMP" },
-      { to: "/pdf-to-tiff", label: "PDF to TIFF" },
-    ],
-  },
-  {
-    label: "Device-Specific Tools",
-    links: [
-      { to: "/iphone-image-to-pdf", label: "iPhone Image to PDF" },
-      { to: "/android-image-to-pdf", label: "Android Image to PDF" },
-      { to: "/windows-image-to-pdf", label: "Windows Image to PDF" },
-      { to: "/mac-image-to-pdf", label: "Mac Image to PDF" },
-      { to: "/online-image-to-pdf", label: "Online Image to PDF" },
-    ],
-  },
+    title: "PDF Tools",
+    items: [
+      { path: "/merge-pdf", name: "Merge PDF" },
+      { path: "/split-pdf", name: "Split PDF" }
+    ]
+  }
 ];
 
-function Header() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [openCategory, setOpenCategory] = useState(null);
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState(null);
   const location = useLocation();
-  const menuRefs = useRef([]);
+  const headerRef = useRef();
 
-  // Responsive: close sidebar on route change
-  React.useEffect(() => {
-    setSidebarOpen(false);
-    setOpenCategory(null);
-  }, [location.pathname]);
+  // Close menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setActiveMenu(null);
+  }, [location]);
 
-  // Improved: Keep dropdown open when mouse is over button or dropdown
-  const handleMouseEnter = (idx) => setOpenCategory(idx);
-  const handleMouseLeave = (idx) => {
-    // Use a timeout to allow moving between button and dropdown
-    setTimeout(() => {
-      if (
-        menuRefs.current[idx] &&
-        !menuRefs.current[idx].matches(":hover")
-      ) {
-        setOpenCategory(null);
+  // Close when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (headerRef.current && !headerRef.current.contains(e.target)) {
+        setIsMenuOpen(false);
+        setActiveMenu(null);
       }
-    }, 100);
-  };
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
-    <header className="bg-gray-900 shadow-lg sticky top-0 z-50">
-      <div className="container mx-auto flex items-center justify-between py-4 px-4">
-        {/* Logo and Title */}
-        <div className="flex items-center space-x-3">
-          <span className="text-2xl font-extrabold text-white tracking-tight">
-            <a href="/">ImgPdfHub</a>
-          </span>
-        </div>
-
-        {/* Desktop Mega Menu */}
-        <div className="hidden md:flex items-center space-x-4">
-          {megaMenuCategories.map((cat, idx) => (
-            <div
-              key={cat.label}
-              className="relative"
-              ref={el => (menuRefs.current[idx] = el)}
-              onMouseEnter={() => handleMouseEnter(idx)}
-              onMouseLeave={() => handleMouseLeave(idx)}
+    <header 
+      ref={headerRef}
+      className="bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100 sticky top-0 z-50"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16 items-center">
+          {/* Logo */}
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center"
+          >
+            <NavLink 
+              to="/" 
+              className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent flex items-center"
             >
-              <button
-                className="px-4 py-2 rounded-lg font-medium text-gray-200 hover:bg-gray-700 transition-colors duration-200 focus:outline-none flex items-center"
-                onClick={() => setOpenCategory(openCategory === idx ? null : idx)}
-                type="button"
-                aria-expanded={openCategory === idx}
-                aria-controls={`mega-menu-${idx}`}
-              >
-                {cat.label}
-                <svg
-                  className="ml-1 w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-              {/* Mega Menu Dropdown */}
-              <div
-                id={`mega-menu-${idx}`}
-                className={`absolute left-0 mt-2 bg-white text-gray-900 shadow-2xl rounded-xl p-4 min-w-[260px] transform transition-all duration-200 origin-top ${
-                  openCategory === idx ? "block scale-100 opacity-100" : "scale-95 opacity-0 pointer-events-none"
-                }`}
-                style={{ zIndex: 100 }}
-              >
-                <ul>
-                  {cat.links.map((link) => (
-                    <li key={link.to}>
-                      <NavLink
-                        to={link.to}
-                        className={({ isActive }) =>
-                          `flex items-center px-2 py-2 rounded-lg font-medium transition-colors duration-200 mb-1
-                          ${
-                            isActive
-                              ? "bg-blue-100 text-blue-700"
-                              : "hover:bg-indigo-600 hover:text-white hover:shadow"
-                          }`
-                        }
-                      >
-                        <span className="mr-2">{icons[link.label]}</span>
-                        {link.label}
-                      </NavLink>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
+              <FiLayers className="mr-2 text-indigo-500" />
+              ImgPDF<span className="font-light">Hub</span>
+            </NavLink>
+          </motion.div>
 
-        {/* Mobile Hamburger */}
-        <button
-          className="md:hidden text-gray-200 focus:outline-none"
-          onClick={() => setSidebarOpen((open) => !open)}
-          aria-label="Toggle sidebar"
-        >
-          <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d={
-                sidebarOpen
-                  ? "M6 18L18 6M6 6l12 12"
-                  : "M4 6h16M4 12h16M4 18h16"
-              }
-            />
-          </svg>
-        </button>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex space-x-1">
+            {menuSections.map((section, idx) => (
+              <div key={section.title} className="relative">
+                <motion.button
+                  whileHover={{ color: '#6366f1' }}
+                  onClick={() => setActiveMenu(activeMenu === idx ? null : idx)}
+                  className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-indigo-500 flex items-center transition-colors"
+                >
+                  {section.title}
+                  <motion.span
+                    animate={{ rotate: activeMenu === idx ? 180 : 0 }}
+                    className="ml-1"
+                  >
+                    <FiChevronDown size={14} />
+                  </motion.span>
+                </motion.button>
+
+                <AnimatePresence>
+                  {activeMenu === idx && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ type: 'spring', damping: 20 }}
+                      className="absolute left-0 mt-2 w-56 origin-top-right rounded-xl bg-white shadow-xl ring-1 ring-black/5 z-50 overflow-hidden"
+                    >
+                      {section.items.map((item) => (
+                        <NavLink
+                          key={item.path}
+                          to={item.path}
+                          className="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors"
+                          onClick={() => setActiveMenu(null)}
+                        >
+                          <span className="mr-3">
+                            {premiumIcons[item.name] || <FiFile className="text-gray-400" />}
+                          </span>
+                          {item.name}
+                        </NavLink>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            className="md:hidden p-2 rounded-md text-gray-500 hover:text-indigo-500 focus:outline-none"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Menu"
+          >
+            {isMenuOpen ? (
+              <FiX className="h-6 w-6" />
+            ) : (
+              <FiMenu className="h-6 w-6" />
+            )}
+          </motion.button>
+        </div>
       </div>
 
-      {/* Sticky Sidebar for Mobile */}
-      <aside
-        className={`fixed top-0 left-0 h-full w-80 bg-gray-900 text-white shadow-2xl z-50 transform transition-transform duration-300 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } md:hidden`}
-      >
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-800">
-          <span className="text-xl font-extrabold">Menu</span>
-          <button
-            className="text-gray-400 hover:text-white"
-            onClick={() => setSidebarOpen(false)}
-            aria-label="Close sidebar"
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden overflow-hidden"
           >
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-        <nav className="overflow-y-auto h-[calc(100%-64px)] px-4 py-4">
-          {megaMenuCategories.map((cat, idx) => (
-            <div key={cat.label} className="mb-4">
-              <button
-                className="flex items-center w-full px-3 py-2 rounded-lg font-medium text-gray-200 hover:bg-gray-800 transition-colors duration-200 focus:outline-none"
-                onClick={() => setOpenCategory(openCategory === idx ? null : idx)}
-                type="button"
-              >
-                {cat.label}
-                <svg
-                  className={`ml-auto w-4 h-4 transform transition-transform duration-200 ${
-                    openCategory === idx ? "rotate-180" : ""
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-              <div className={`${openCategory === idx ? "block" : "hidden"} pl-4 mt-2`}>
-                <ul>
-                  {cat.links.map((link) => (
-                    <li key={link.to}>
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-100">
+              {menuSections.map((section) => (
+                <div key={section.title} className="mb-2">
+                  <button
+                    onClick={() => setActiveMenu(activeMenu === section.title ? null : section.title)}
+                    className="w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50"
+                  >
+                    {section.title}
+                    {activeMenu === section.title ? (
+                      <FiChevronUp className="text-indigo-500" />
+                    ) : (
+                      <FiChevronDown className="text-gray-400" />
+                    )}
+                  </button>
+                  <motion.div
+                    initial={{ height: 0 }}
+                    animate={{ height: activeMenu === section.title ? 'auto' : 0 }}
+                    className="overflow-hidden pl-4"
+                  >
+                    {section.items.map((item) => (
                       <NavLink
-                        to={link.to}
-                        className={({ isActive }) =>
-                          `flex items-center px-2 py-2 rounded-lg font-medium transition-colors duration-200 mb-1 ${
-                            isActive
-                              ? "bg-blue-600 text-white"
-                              : "hover:bg-gray-800"
-                          }`
-                        }
-                        onClick={() => setSidebarOpen(false)}
+                        key={item.path}
+                        to={item.path}
+                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 flex items-center"
+                        onClick={() => setIsMenuOpen(false)}
                       >
-                        <span className="mr-2">{icons[link.label]}</span>
-                        {link.label}
+                        <span className="mr-3">
+                          {premiumIcons[item.name] || <FiFile className="text-gray-400" />}
+                        </span>
+                        {item.name}
                       </NavLink>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                    ))}
+                  </motion.div>
+                </div>
+              ))}
             </div>
-          ))}
-        </nav>
-      </aside>
-      {/* Overlay for sidebar */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-40 z-40 md:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
-}
+};
 
 export default Header;
