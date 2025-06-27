@@ -141,17 +141,17 @@ const ImageConverter = () => {
           content="image converter, convert image, png to jpg, jpg to png, webp to jpg, free image converter"
         />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://yourdomain.com/image-converter" />
+        <link rel="canonical" href="https://imgpdfhub.com/image-converter" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Image Converter – Free & Secure" />
         <meta
           property="og:description"
           content="Easily convert images to PNG, JPG, JPEG, WEBP, AVIF, or TIFF online. 100% free, fast and secure."
         />
-        <meta property="og:url" content="https://yourdomain.com/image-converter" />
+        <meta property="og:url" content="https://imgpdfhub.com/image-converter" />
         <meta
           property="og:image"
-          content="https://yourdomain.com/assets/og-image-converter.png"
+          content="https://imgpdfhub.com/assets/og-image-converter.png"
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Image Converter – Free Online Tool" />
@@ -161,7 +161,7 @@ const ImageConverter = () => {
         />
         <meta
           name="twitter:image"
-          content="https://yourdomain.com/assets/og-image-converter.png"
+          content="https://imgpdfhub.com/assets/og-image-converter.png"
         />
         <meta name="theme-color" content="#4F46E5" />
         <link rel="manifest" href="/manifest.json" />

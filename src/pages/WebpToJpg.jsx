@@ -181,7 +181,7 @@ const WebpToJpg = memo(() => {
                     content="webp to jpg, convert webp to jpg, image to jpg, online webp to jpg converter, free webp to jpg"
                 />
                 <meta name="robots" content="index, follow" />
-                <link rel="canonical" href="https://yourdomain.com/webp-to-jpg" />
+                <link rel="canonical" href="https://imgpdfhub.com/webp-to-jpg" />
                 {/* Open Graph for Facebook & LinkedIn */}
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content="WebP to JPG Converter – Free & Secure" />
@@ -189,10 +189,10 @@ const WebpToJpg = memo(() => {
                     property="og:description"
                     content="Easily convert WEBP images into JPG files online. 100% free, fast and secure. No email required!"
                 />
-                <meta property="og:url" content="https://yourdomain.com/webp-to-jpg" />
+                <meta property="og:url" content="https://imgpdfhub.com/webp-to-jpg" />
                 <meta
                     property="og:image"
-                    content="https://yourdomain.com/assets/og-webp-to-jpg.png"
+                    content="https://imgpdfhub.com/assets/og-webp-to-jpg.png"
                 />
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
@@ -203,7 +203,7 @@ const WebpToJpg = memo(() => {
                 />
                 <meta
                     name="twitter:image"
-                    content="https://yourdomain.com/assets/og-webp-to-jpg.png"
+                    content="https://imgpdfhub.com/assets/og-webp-to-jpg.png"
                 />
                 <meta name="theme-color" content="#4F46E5" />
                 <link rel="manifest" href="/manifest.json" />

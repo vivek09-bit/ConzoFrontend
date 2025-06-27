@@ -180,7 +180,7 @@ function WebpToPng() {
                     content="webp to png, convert webp to png, image to png, online webp to png converter, free webp to png"
                 />
                 <meta name="robots" content="index, follow" />
-                <link rel="canonical" href="https://yourdomain.com/webp-to-png" />
+                <link rel="canonical" href="https://imgpdfhub.com/webp-to-png" />
                 {/* Open Graph for Facebook & LinkedIn */}
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content="WEBP to PNG Converter – Free & Secure" />
@@ -188,10 +188,10 @@ function WebpToPng() {
                     property="og:description"
                     content="Easily convert WEBP images into PNG files online. 100% free, fast and secure. No email required!"
                 />
-                <meta property="og:url" content="https://yourdomain.com/webp-to-png" />
+                <meta property="og:url" content="https://imgpdfhub.com/webp-to-png" />
                 <meta
                     property="og:image"
-                    content="https://yourdomain.com/assets/og-webp-to-png.png"
+                    content="https://imgpdfhub.com/assets/og-webp-to-png.png"
                 />
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
@@ -202,7 +202,7 @@ function WebpToPng() {
                 />
                 <meta
                     name="twitter:image"
-                    content="https://yourdomain.com/assets/og-webp-to-png.png"
+                    content="https://imgpdfhub.com/assets/og-webp-to-png.png"
                 />
                 <meta name="theme-color" content="#4F46E5" />
                 <link rel="manifest" href="/manifest.json" />

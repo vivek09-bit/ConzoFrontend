@@ -88,12 +88,12 @@ function ImageToPdf() {
         <meta property="og:title" content="Free Online Image to PDF Converter" />
         <meta property="og:description" content="Convert images to PDF online for free. Fast, secure, and easy-to-use tool supporting JPG, PNG, and GIF." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/convert" />
-        <meta property="og:image" content="https://yourdomain.com/og-image.jpg" />
+        <meta property="og:url" content="https://imgpdfhub.com/convert" />
+        <meta property="og:image" content="https://imgpdfhub.com/og-image.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Online Image to PDF Converter" />
         <meta name="twitter:description" content="Convert images to PDF online for free. Fast, secure, and easy-to-use tool supporting JPG, PNG, and GIF." />
-        <meta name="twitter:image" content="https://yourdomain.com/og-image.jpg" />
+        <meta name="twitter:image" content="https://imgpdfhub.com/og-image.jpg" />
       </Helmet>
       <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-100 px-4">
         <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-8 flex flex-col items-center">

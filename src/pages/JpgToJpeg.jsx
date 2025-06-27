@@ -181,7 +181,7 @@ const JpgToJpeg = memo(() => {
                     content="jpg to jpeg, convert jpg to jpeg, image to jpeg, online jpg to jpeg converter, free jpg to jpeg"
                 />
                 <meta name="robots" content="index, follow" />
-                <link rel="canonical" href="https://yourdomain.com/jpg-to-jpeg" />
+                <link rel="canonical" href="https://imgpdfhub.com/jpg-to-jpeg" />
                 {/* Open Graph for Facebook & LinkedIn */}
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content="JPG to JPEG Converter – Free & Secure" />
@@ -189,10 +189,10 @@ const JpgToJpeg = memo(() => {
                     property="og:description"
                     content="Easily convert JPG images into JPEG files online. 100% free, fast and secure. No email required!"
                 />
-                <meta property="og:url" content="https://yourdomain.com/jpg-to-jpeg" />
+                <meta property="og:url" content="https://imgpdfhub.com/jpg-to-jpeg" />
                 <meta
                     property="og:image"
-                    content="https://yourdomain.com/assets/og-jpg-to-jpeg.png"
+                    content="https://imgpdfhub.com/assets/og-jpg-to-jpeg.png"
                 />
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
@@ -203,7 +203,7 @@ const JpgToJpeg = memo(() => {
                 />
                 <meta
                     name="twitter:image"
-                    content="https://yourdomain.com/assets/og-jpg-to-jpeg.png"
+                    content="https://imgpdfhub.com/assets/og-jpg-to-jpeg.png"
                 />
                 <meta name="theme-color" content="#4F46E5" />
                 <link rel="manifest" href="/manifest.json" />

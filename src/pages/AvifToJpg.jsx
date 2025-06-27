@@ -180,7 +180,7 @@ function AvifToJpg() {
                     content="avif to jpg, convert avif to jpg, image to jpg, online avif to jpg converter, free avif to jpg"
                 />
                 <meta name="robots" content="index, follow" />
-                <link rel="canonical" href="https://yourdomain.com/avif-to-jpg" />
+                <link rel="canonical" href="https://imgpdfhub.com/avif-to-jpg" />
                 {/* Open Graph for Facebook & LinkedIn */}
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content="AVIF to JPG Converter – Free & Secure" />
@@ -188,10 +188,10 @@ function AvifToJpg() {
                     property="og:description"
                     content="Easily convert AVIF images into JPG files online. 100% free, fast and secure. No email required!"
                 />
-                <meta property="og:url" content="https://yourdomain.com/avif-to-jpg" />
+                <meta property="og:url" content="https://imgpdfhub.com/avif-to-jpg" />
                 <meta
                     property="og:image"
-                    content="https://yourdomain.com/assets/og-avif-to-jpg.png"
+                    content="https://imgpdfhub.com/assets/og-avif-to-jpg.png"
                 />
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
@@ -202,7 +202,7 @@ function AvifToJpg() {
                 />
                 <meta
                     name="twitter:image"
-                    content="https://yourdomain.com/assets/og-avif-to-jpg.png"
+                    content="https://imgpdfhub.com/assets/og-avif-to-jpg.png"
                 />
                 <meta name="theme-color" content="#4F46E5" />
                 <link rel="manifest" href="/manifest.json" />
