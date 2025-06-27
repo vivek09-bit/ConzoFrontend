@@ -60,7 +60,7 @@ const PngToJpg = () => {
         <>
             <Helmet>
                 {/* Primary English (India-focused) */}
-                <title>Free PNG to JPG Converter Online - High Quality, No Watermark | ImgPdfHub</title>
+                <title>Free PNG to JPG Converter Online - High Quality | ImgPdfHub</title>
                 <meta name="description" content="Convert PNG to JPG in 1 click with our free online tool. Perfect for India, Indonesia, US & worldwide. Preserve quality, adjust compression, and remove backgrounds." />
                 <link rel="canonical" href="https://imgpdfhub.com/png-to-jpg" />
                 {/* Open Graph / Social */}
