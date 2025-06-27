@@ -7,6 +7,6 @@ export default defineConfig({
   
   preview: {
     host: true,
-    allowedHosts: ['conzofrontend.onrender.com', 'asthica.com'],
+    allowedHosts: ['imgpdfhub.com'],
   },
 });
