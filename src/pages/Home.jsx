@@ -142,6 +142,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 `}
 </script>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C3YH56WD5N"></script>
+<script>
+{`  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-C3YH56WD5N');
+`}</script>
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",

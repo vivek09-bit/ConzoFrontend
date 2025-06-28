@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import { FiUpload, FiDownload, FiImage, FiSettings, FiTrash2, FiAlertCircle } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
-import ImageConversionGuide from '../components/blog/ImageConversionGuide'
 
 const MAX_FILE_SIZE_MB = 10;
 const MAX_PARALLEL_UPLOADS = 3;

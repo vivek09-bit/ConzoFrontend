@@ -181,7 +181,7 @@ const JpgToJpeg = memo(() => {
                     content="jpg to jpeg, convert jpg to jpeg, image to jpeg, online jpg to jpeg converter, free jpg to jpeg"
                 />
                 <meta name="robots" content="index, follow" />
-                <link rel="canonical" href="https://imgpdfhub.com/jpg-to-jpeg" />
+                <link rel="canonical" href="https://imgpdfhub.com/jpeg-to-jpg" />
                 {/* Open Graph for Facebook & LinkedIn */}
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content="JPG to JPEG Converter – Free & Secure" />
