@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback, memo } from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import { FaSpinner, FaCheckCircle, FaLock, FaRegTrashAlt, FaArrowUp, FaArrowDown } from "react-icons/fa";
-
+import WTJBlog from "./WTJBlog";
 const VITE_BACKEND_DOMAIN = import.meta.env.VITE_BACKEND_DOMAIN;
 
 const WebpToJpg = memo(() => {
@@ -171,7 +171,7 @@ const WebpToJpg = memo(() => {
     return (
         <main className="bg-gray-100 min-h-screen flex flex-col items-center">
             <Helmet>
-                <title>WebP to JPG Converter | Free, Fast & Secure Online Tool</title>
+                <title>WEBP to JPG Converter | Free, Fast & Secure Online Tool</title>
                 <meta
                     name="description"
                     content="Convert WEBP to JPG online free – no registration, no watermark. Fast and secure WEBP to JPG tool to convert images to high-quality JPG."
@@ -190,12 +190,12 @@ const WebpToJpg = memo(() => {
                     content="Easily convert WEBP images into JPG files online. 100% free, fast and secure. No email required!"
                 />
                 <meta property="og:url" content="https://imgpdfhub.com/webp-to-jpg" />
-                <meta
+                {/* <meta
                     property="og:image"
                     content="https://imgpdfhub.com/assets/og-webp-to-jpg.png"
-                />
+                /> */}
                 {/* Twitter Card */}
-                <meta name="twitter:card" content="summary_large_image" />
+                {/* <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="WebP to JPG – Free Online Converter" />
                 <meta
                     name="twitter:description"
@@ -204,7 +204,7 @@ const WebpToJpg = memo(() => {
                 <meta
                     name="twitter:image"
                     content="https://imgpdfhub.com/assets/og-webp-to-jpg.png"
-                />
+                /> */}
                 <meta name="theme-color" content="#4F46E5" />
                 <link rel="manifest" href="/manifest.json" />
             </Helmet>
@@ -212,7 +212,7 @@ const WebpToJpg = memo(() => {
             <section className="py-8 px-4 flex flex-col items-center">
                 <div className="text-center mb-8">
                     <h1 className="text-4xl md:text-5xl font-bold mb-3">
-                        WebP to JPG Converter
+                        WEBP to JPG Converter
                     </h1>
                     <p className="text-lg text-gray-500 max-w-2xl mx-auto">
                         Convert WEBP images to JPG online for free. No registration, no watermark. Instant results.
@@ -387,6 +387,7 @@ const WebpToJpg = memo(() => {
                     </div>
                 )}
             </section>
+            <WTJBlog />
         </main>
     );
 });
