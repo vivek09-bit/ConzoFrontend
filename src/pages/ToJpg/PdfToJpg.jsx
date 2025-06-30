@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
+import PdfToJpgGuide from "../../components/blog/PdfToJpgGuide";
 
 const DOMAIN = import.meta.env.VITE_BACKEND_DOMAIN || "http://localhost:5000";
 
@@ -54,9 +55,9 @@ const PdfToJpg = () => {
   };
 
   return (
-    <section className="py-10 px-4 flex flex-col items-center min-h-screen bg-gray-900 text-white">
+    <section className="py-10 px-4 flex flex-col items-center min-h-screen bg-white text-black">
       <h1 className="text-4xl font-bold mb-4">PDF to JPG</h1>
-      <p className="mb-6 text-gray-300">Convert PDF pages to high-quality JPG images.</p>
+      <p className="mb-6 text-black">Convert PDF pages to high-quality JPG images.</p>
 
       <div className="bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-xl border border-gray-700 text-center">
         <label className="cursor-pointer bg-indigo-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-indigo-700 transition inline-block mb-4">
@@ -113,6 +114,7 @@ const PdfToJpg = () => {
           </div>
         )}
       </div>
+      <PdfToJpgGuide />
     </section>
   );
 };

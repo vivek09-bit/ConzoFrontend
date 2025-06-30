@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 import { FaSpinner, FaCheckCircle, FaLock, FaRegTrashAlt, FaArrowUp, FaArrowDown } from "react-icons/fa";
+import JpgToPdfGuide from "../../components/blog/jpgtopdfguide";
 
 const VITE_BACKEND_DOMAIN = import.meta.env.VITE_BACKEND_DOMAIN;
 
@@ -375,6 +376,7 @@ function JpgToPdf() {
           </div>
         )}
       </section>
+      <JpgToPdfGuide />
     </main>
   );
 }

@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import { DOMAIN } from "../../constants";
+import ImageToPdfGuide from "../../components/blog/ImageToPdfGuide";
 
 
 function ImageToPdf() {
@@ -190,6 +191,7 @@ function ImageToPdf() {
           </div>
         )}
       </section>
+      <ImageToPdfGuide />
     </>
   );
 }
